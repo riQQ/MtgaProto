@@ -1,0 +1,6 @@
+name: "check latest MTGA version"
+description: "Checks for the latest MTGA version"
+author: "riQQ"
+runs:
+  using: "node12"
+  main: "./thanks.js"
