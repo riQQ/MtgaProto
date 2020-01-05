@@ -12,8 +12,6 @@ jobs:
           fetch-depth: 1
       - run: npm install
         working-directory: ./.github/actions/check-version-action
-      - run: npm run build
-        working-directory: ./.github/actions/check-version-action
       - uses: ./.github/actions/check-version-action
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
