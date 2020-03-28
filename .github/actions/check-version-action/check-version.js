@@ -8,6 +8,7 @@ const core = require('@actions/core');
     console.log(`The response: ${response.body}`);
     const responseJson = JSON.parse(response.body);
     console.log(`Versions: ${JSON.stringify(responseJson.Versions)}`);
+    core.setOutput("msiUrl", ${JSON.stringify(responseJson.CurrentInstallerURL)});
   } catch (error) {
     core.setFailed(error.message);
   }
