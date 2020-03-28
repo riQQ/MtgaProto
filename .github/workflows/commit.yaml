@@ -51,5 +51,5 @@ jobs:
         with:
           dotnet-version: '2.1.805' # SDK Version to use
       - run: |
-          cd "$Env:GITHUB_WORKSPACE\..\proto-extractor
+          cd "$Env:GITHUB_WORKSPACE\..\proto-extractor\extractor
           dotnet build
