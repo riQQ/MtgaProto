@@ -26,11 +26,14 @@ jobs:
           echo $Env:GITHUB_WORKSPACE
           cd "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\"
           .\MSBuild.exe $Env:GITHUB_WORKSPACE\..\MsiExtractor\MsiExtractor.sln
-      - run: |
+      - id: download_msi
+        run: |
           $msiUrl = ${{ steps.get_version.outputs.msiUrl }}
           $fileName = (([uri]$msiUrl).Segments)[-1]
-          Invoke-WebRequest $msiUrl -OutFile "$Env:GITHUB_WORKSPACE\..\$fileName"
+          $msiFilePath = $Env:GITHUB_WORKSPACE\..\$fileName
+          Invoke-WebRequest $msiUrl -OutFile "$msiFilePath"
+          echo "::set-output name=msiFilePath::$msiFilePath"
       - name: Run MsiExtractor
         run: |
           cd "$Env:GITHUB_WORKSPACE\..\MsiExtractor\MsiExtractor\bin\Debug"
-          .\MsiExtractor.exe
+          .\MsiExtractor.exe ${{ steps.download_msi.outputs.msiFilePath }} "Wizards.MDN.GreProtobuf.Unity.dll"
