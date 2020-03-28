@@ -18,6 +18,7 @@ jobs:
       - uses: actions/checkout@v1
         with:
           repository: riQQ/MsiExtractor
+          ref: refs/heads/master
           path: MsiExtractor
           fetch-depth: 1
       - run: |
