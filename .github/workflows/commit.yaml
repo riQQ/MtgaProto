@@ -29,8 +29,11 @@ jobs:
       - id: download_msi
         run: |
           $msiUrl = "${{ steps.get_version.outputs.msiUrl }}"
+          echo $msiUrl
           $fileName = (([uri]$msiUrl).Segments)[-1]
+          echo $fileName
           $msiFilePath = "$Env:GITHUB_WORKSPACE\..\$fileName"
+          echo $msiFilePath
           Invoke-WebRequest $msiUrl -OutFile '"$msiFilePath"'
           echo "::set-output name=msiFilePath::$msiFilePath"
       - name: Run MsiExtractor
