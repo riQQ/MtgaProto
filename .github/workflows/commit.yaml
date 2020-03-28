@@ -28,7 +28,7 @@ jobs:
           .\MSBuild.exe $Env:GITHUB_WORKSPACE\..\MsiExtractor\MsiExtractor.sln
       - id: download_msi
         run: |
-          $msiUrl = "${{ steps.get_version.outputs.msiUrl }}"
+          $msiUrl = ${{ steps.get_version.outputs.msiUrl }}
           echo $msiUrl
           $fileName = (([uri]$msiUrl).Segments)[-1]
           echo $fileName
