@@ -40,3 +40,11 @@ jobs:
         run: |
           cd "$Env:GITHUB_WORKSPACE\..\MsiExtractor\MsiExtractor\bin\Debug"
           .\MsiExtractor.exe ${{ steps.download_msi.outputs.msiFilePath }} "Wizards.MDN.GreProtobuf.Unity.dll"
+      - name: Checkout proto extractor
+        uses: actions/checkout@v1
+        with:
+          repository: riQQ/proto-extractor
+          ref: refs/heads/mtgatool-formatting
+          path: proto-extractor
+          fetch-depth: 1
+        
