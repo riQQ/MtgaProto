@@ -34,7 +34,7 @@ jobs:
           echo $fileName
           $msiFilePath = "$Env:GITHUB_WORKSPACE\..\$fileName"
           echo $msiFilePath
-          Invoke-WebRequest $msiUrl -OutFile '"$msiFilePath"'
+          (New-Object System.Net.WebClient).DownloadFile($msiUrl, $msiFilePath)
           echo "::set-output name=msiFilePath::$msiFilePath"
       - name: Run MsiExtractor
         run: |
