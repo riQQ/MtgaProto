@@ -4,3 +4,6 @@ author: "riQQ"
 runs:
   using: "node12"
   main: "./check-version.js"
+outputs:
+  msiUrl:
+    description: 'Contains the URL to the latest MTGA msi'
