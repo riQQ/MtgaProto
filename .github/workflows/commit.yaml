@@ -22,7 +22,6 @@ jobs:
           path: MsiExtractor
           fetch-depth: 1
       - run: |
-          echo $GITHUB_WORKSPACE
           echo $Env:GITHUB_WORKSPACE
           cd "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\"
-          .\MSBuild.exe $Env:GITHUB_WORKSPACE\MsiExtractor\MsiExtractor.sln
+          .\MSBuild.exe $Env:GITHUB_WORKSPACE\..\MsiExtractor\MsiExtractor.sln
