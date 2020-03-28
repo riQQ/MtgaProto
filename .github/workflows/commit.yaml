@@ -28,10 +28,10 @@ jobs:
           .\MSBuild.exe $Env:GITHUB_WORKSPACE\..\MsiExtractor\MsiExtractor.sln
       - id: download_msi
         run: |
-          $msiUrl = ${{ steps.get_version.outputs.msiUrl }}
+          $msiUrl = "${{ steps.get_version.outputs.msiUrl }}"
           $fileName = (([uri]$msiUrl).Segments)[-1]
-          $msiFilePath = $Env:GITHUB_WORKSPACE\..\$fileName
-          Invoke-WebRequest $msiUrl -OutFile "$msiFilePath"
+          $msiFilePath = "$Env:GITHUB_WORKSPACE\..\$fileName"
+          Invoke-WebRequest $msiUrl -OutFile '"$msiFilePath"'
           echo "::set-output name=msiFilePath::$msiFilePath"
       - name: Run MsiExtractor
         run: |
