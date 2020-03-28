@@ -12,7 +12,8 @@ jobs:
           fetch-depth: 1
       - run: npm install
         working-directory: ./.github/actions/check-version-action
-      - uses: ./.github/actions/check-version-action
+      - id: get_version
+        uses: ./.github/actions/check-version-action
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - uses: actions/checkout@v1
@@ -25,6 +26,8 @@ jobs:
           echo $Env:GITHUB_WORKSPACE
           cd "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\"
           .\MSBuild.exe $Env:GITHUB_WORKSPACE\..\MsiExtractor\MsiExtractor.sln
+      -run: |
+          echo ${{steps.get_version.msiUrl}}
       - name: Run MsiExtractor
         run: |
           cd "$Env:GITHUB_WORKSPACE\..\MsiExtractor\MsiExtractor\bin\Debug"
