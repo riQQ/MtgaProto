@@ -27,7 +27,9 @@ jobs:
           cd "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\"
           .\MSBuild.exe $Env:GITHUB_WORKSPACE\..\MsiExtractor\MsiExtractor.sln
       - run: |
-          echo ${{ steps.get_version.outputs.msiUrl }}
+          $msiUrl = ${{ steps.get_version.outputs.msiUrl }}
+          $fileName = (([uri]$msiUrl).Segments)[-1]
+          Invoke-WebRequest $msiUrl -OutFile "$Env:GITHUB_WORKSPACE\..\$fileName"
       - name: Run MsiExtractor
         run: |
           cd "$Env:GITHUB_WORKSPACE\..\MsiExtractor\MsiExtractor\bin\Debug"
