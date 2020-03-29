@@ -40,6 +40,8 @@ jobs:
         run: |
           cd "$Env:GITHUB_WORKSPACE\..\MsiExtractor\MsiExtractor\bin\Debug"
           .\MsiExtractor.exe ${{ steps.download_msi.outputs.msiFilePath }} "Wizards.MDN.GreProtobuf.Unity.dll"
+          $outputDirectory = Split-Path -Parent ${{ steps.download_msi.outputs.msiFilePath }}
+          dir "$outputDirectory"
       - name: Checkout proto extractor
         uses: actions/checkout@v1
         with:
