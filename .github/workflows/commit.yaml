@@ -52,3 +52,6 @@ jobs:
           dotnet-version: '2.1.805' # SDK Version to use
       - run: dotnet build
         working-directory: ${{github.workspace}}\..\proto-extractor\extractor
+      - name: Run proto extractor
+        run: dotnet run --proto3 --resolve-circular-dependancies --automatic-packaging --resolve-name-collisions --outPath "${{github.workspace}}\.." --libPath "${{github.workspace}}\.." "${{github.workspace}}\..\Wizards.MDN.GreProtobuf.Unity.dll" 
+        working-directory: ${{github.workspace}}\..\proto-extractor\extractor
