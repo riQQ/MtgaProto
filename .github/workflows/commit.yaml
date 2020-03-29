@@ -56,7 +56,15 @@ jobs:
         run: dotnet build
         working-directory: ${{github.workspace}}\..\proto-extractor\extractor
       - name: Run proto extractor
+        id: extract-proto
         run: |
           dotnet run --proto3 --resolve-circular-dependancies --automatic-packaging --resolve-name-collisions --outPath "${{github.workspace}}\.." --libPath "${{github.workspace}}\.." "${{github.workspace}}\..\Wizards.MDN.GreProtobuf.Unity.dll"
           dir "${{github.workspace}}\.."
+          $protoFile = Get-Childitem -Path "${{github.workspace}}\.." -Filter *.proto | Select -First 1
+          echo "::set-output name=protoPath::$($protoFile.FullName)"
         working-directory: ${{github.workspace}}\..\proto-extractor\extractor
+      - name: Upload proto as artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: Messages.proto
+          path: ${{steps.extract-proto.outputs.protoPath}}
