@@ -56,5 +56,7 @@ jobs:
         run: dotnet build
         working-directory: ${{github.workspace}}\..\proto-extractor\extractor
       - name: Run proto extractor
-        run: dotnet run --proto3 --resolve-circular-dependancies --automatic-packaging --resolve-name-collisions --outPath "${{github.workspace}}\.." --libPath "${{github.workspace}}\.." "${{github.workspace}}\..\Wizards.MDN.GreProtobuf.Unity.dll" 
+        run: |
+          dotnet run --proto3 --resolve-circular-dependancies --automatic-packaging --resolve-name-collisions --outPath "${{github.workspace}}\.." --libPath "${{github.workspace}}\.." "${{github.workspace}}\..\Wizards.MDN.GreProtobuf.Unity.dll"
+          dir "${{github.workspace}}\.."
         working-directory: ${{github.workspace}}\..\proto-extractor\extractor
