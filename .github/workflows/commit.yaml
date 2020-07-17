@@ -7,7 +7,7 @@ jobs:
     name: Get latest MTGA version
     runs-on: windows-2019
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
         with:
           fetch-depth: 1
       - run: npm install
@@ -63,6 +63,21 @@ jobs:
           $protoFile = Get-Childitem -Path "${{github.workspace}}\.." -Filter *.proto | Select -First 1
           echo "::set-output name=protoPath::$($protoFile.FullName)"
         working-directory: ${{github.workspace}}\..\proto-extractor\extractor
+      - name: Commit proto
+        run: |
+          Copy-Item "${{steps.extract-proto.outputs.protoPath}}" -Destination "messages.proto"
+          # git config --global user.name 'riQQ'
+          # git config --global user.email 'riQQ@users.noreply.github.com'
+          git add messages.proto
+          git diff-index --quiet HEAD
+          if( $? )
+          {
+            echo "No changes to commit and push"
+            exit
+          }
+                    
+          git commit -m "Update proto"
+          git push
       - name: Upload proto as artifact
         uses: actions/upload-artifact@v1
         with:
