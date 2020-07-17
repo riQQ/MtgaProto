@@ -68,7 +68,7 @@ jobs:
           Copy-Item "${{steps.extract-proto.outputs.protoPath}}" -Destination "messages.proto"
           # git config --global user.name 'riQQ'
           # git config --global user.email 'riQQ@users.noreply.github.com'
-          git add messages.proto          
+          git add messages.proto
           if( git diff-index --quiet HEAD )
           {
             echo "No changes to commit and push"
@@ -78,8 +78,6 @@ jobs:
           echo "Commiting and pushing changes"
           git commit -m "Update proto"
           git push
-        shell: |
-          pwsh -noninteractive -ExecutionPolicy Unrestricted -command "try {{ $ErrorActionPreference='Stop'; . '{0}' }} catch {{ echo ($_ | Format-Table | Out-String); echo $_.ScriptStackTrace; throw; }} if ((Test-Path -LiteralPath variable:\LASTEXITCODE)) {{ exit $LASTEXITCODE }}"
       - name: Upload proto as artifact
         uses: actions/upload-artifact@v1
         with:
