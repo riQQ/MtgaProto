@@ -74,7 +74,8 @@ jobs:
             echo "No changes to commit and push"
             exit
           }
-                    
+          
+          echo "Commiting and pushing changes"
           git commit -m "Update proto"
           git push
         shell: |
