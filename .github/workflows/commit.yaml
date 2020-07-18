@@ -74,7 +74,7 @@ jobs:
           if( git diff-index --quiet HEAD )
           {
             echo "No changes to commit and push"
-            exit
+            exit 0
           }
           
           echo "Commiting and pushing changes"
