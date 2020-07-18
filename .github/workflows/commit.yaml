@@ -71,7 +71,8 @@ jobs:
           git config --global user.email 'riQQ@users.noreply.github.com'
           git add messages.proto
           git status
-          if( git diff-index --quiet HEAD )
+          git diff-index --quiet HEAD
+          if( $? )
           {
             echo "No changes to commit and push"
             exit 0
