@@ -66,9 +66,11 @@ jobs:
       - name: Commit proto
         run: |
           Copy-Item "${{steps.extract-proto.outputs.protoPath}}" -Destination "messages.proto"
+          git status
           # git config --global user.name 'riQQ'
           # git config --global user.email 'riQQ@users.noreply.github.com'
           git add messages.proto
+          git status
           if( git diff-index --quiet HEAD )
           {
             echo "No changes to commit and push"
