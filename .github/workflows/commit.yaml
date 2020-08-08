@@ -1,6 +1,11 @@
 name: Check latest MTGA version on commit
 on:
-  push
+  push:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version'     
+        required: false
 
 jobs:
   buildjob:
