@@ -307,6 +307,7 @@ message Action {
 	repeated Counter costCounters = 23;
 	uint32 maxActivations = 24;
 	bool isBatchable = 25;
+	ManaRequirement twobridGenericManaCost = 26;
 }
 
 message ActionInfo {
@@ -1577,6 +1578,7 @@ enum GREMessageType {
 	GREMessageType_EdictalMessage = 54;
 	GREMessageType_TimeoutMessage = 55;
 	GREMessageType_TimerStateMessage = 56;
+	GREMessageType_SubmitDeckConfirmation = 57;
 }
 
 message GREResumeMatchRequest {
