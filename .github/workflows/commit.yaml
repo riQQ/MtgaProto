@@ -70,6 +70,8 @@ jobs:
         working-directory: ${{github.workspace}}\..\proto-extractor\extractor
       - name: Commit proto
         run: |
+          # full error details
+          $ErrorView = 'NormalView'
           Copy-Item "${{steps.extract-proto.outputs.protoPath}}" -Destination "messages.proto"
           git status
           git config --global user.name 'riQQ'
