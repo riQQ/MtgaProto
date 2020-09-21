@@ -87,7 +87,8 @@ jobs:
           
           echo "Commiting and pushing changes"
           git commit -m "Update proto"
-          git push
+          # print progress to stdout instead of stderr to don't cause an error in powershell
+          git push --porcelain
       - name: Upload proto as artifact
         uses: actions/upload-artifact@v1
         with:
