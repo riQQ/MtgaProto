@@ -260,11 +260,13 @@ enum AbilityType {
 	AbilityType_ProtectionFromDogs = 204;
 	AbilityType_Mill = 205;
 	AbilityType_ProtectionFromChosenName = 206;
-	AbilityType_Placeholder1 = 207;
-	AbilityType_Placeholder2 = 208;
-	AbilityType_Placeholder3 = 209;
-	AbilityType_Placeholder4 = 210;
-	AbilityType_Placeholder5 = 211;
+	AbilityType_MDFC = 207;
+	AbilityType_Placeholder208 = 208;
+	AbilityType_Placeholder209 = 209;
+	AbilityType_Placeholder210 = 210;
+	AbilityType_Placeholder211 = 211;
+	AbilityType_Placeholder212 = 212;
+	AbilityType_AdornCards_Test = 987;
 	AbilityType_GildCards_Test = 988;
 	AbilityType_Twiddle_Test = 989;
 	AbilityType_Donate_Test = 990;
@@ -335,11 +337,13 @@ enum ActionType {
 	ActionType_OpeningHandAction = 15;
 	ActionType_CastAdventure = 16;
 	ActionType_FloatMana = 17;
-	ActionType_Placeholder1 = 18;
-	ActionType_Placeholder2 = 19;
-	ActionType_Placeholder3 = 20;
-	ActionType_Placeholder4 = 21;
-	ActionType_Placeholder5 = 22;
+	ActionType_CastMDFC = 18;
+	ActionType_PlayMDFC = 19;
+	ActionType_Placeholder20 = 20;
+	ActionType_Placeholder21 = 21;
+	ActionType_Placeholder22 = 22;
+	ActionType_Placeholder23 = 23;
+	ActionType_Placeholder24 = 24;
 }
 
 message ActionsAvailableReq {
@@ -448,6 +452,7 @@ enum AnnotationType {
 	AnnotationType_ChoosingAttachments = 79;
 	AnnotationType_TemporaryPermanent = 80;
 	AnnotationType_GamewideHistoryCount = 81;
+	AnnotationType_AbilityExhausted = 82;
 }
 
 enum Answer {
@@ -583,6 +588,7 @@ message AutoTapActionsAvailableReq {
 message AutoTapSolution {
 	repeated AutoTapAction autoTapActions = 1;
 	repeated ManaPaymentCondition manaPaymentConditions = 2;
+	repeated ManaColor selectedManaColors = 3;
 }
 
 enum AutoTapStopsSetting {
@@ -672,6 +678,7 @@ message CardConfig {
 	uint32 count = 1;
 	string title = 2;
 	string expansionCode = 3;
+	string rarity = 4;
 }
 
 enum CardMechanicType {
@@ -724,11 +731,12 @@ enum CardMechanicType {
 	CardMechanicType_Riot = 48;
 	CardMechanicType_Mutate = 49;
 	CardMechanicType_GraveyardExile = 50;
-	CardMechanicType_Placeholder1 = 51;
-	CardMechanicType_Placeholder2 = 52;
-	CardMechanicType_Placeholder3 = 53;
-	CardMechanicType_Placeholder4 = 54;
-	CardMechanicType_Placeholder5 = 55;
+	CardMechanicType_Exert = 51;
+	CardMechanicType_Placeholder52 = 52;
+	CardMechanicType_Placeholder53 = 53;
+	CardMechanicType_Placeholder54 = 54;
+	CardMechanicType_Placeholder55 = 55;
+	CardMechanicType_Placeholder56 = 56;
 }
 
 message CardSkinTuple {
@@ -801,6 +809,7 @@ message CastingTimeOptionsReq {
 
 message CastingTimeOptionsResp {
 	CastingTimeOptionResp castingTimeOptionResp = 1;
+	repeated CastingTimeOptionResp castingTimeOptionResps = 2;
 }
 
 message CheckpointConfiguration {
@@ -1225,19 +1234,16 @@ enum CounterType {
 	CounterType_Foreshadow = 144;
 	CounterType_Incarnation = 145;
 	CounterType_Soul = 146;
-	CounterType_PlaceholderCounterType15 = 147;
-	CounterType_PlaceholderCounterType1 = 148;
-	CounterType_PlaceholderCounterType2 = 149;
-	CounterType_PlaceholderCounterType3 = 150;
-	CounterType_PlaceholderCounterType4 = 151;
-	CounterType_PlaceholderCounterType5 = 152;
-	CounterType_PlaceholderCounterType6 = 153;
-	CounterType_PlaceholderCounterType7 = 154;
-	CounterType_PlaceholderCounterType8 = 155;
-	CounterType_PlaceholderCounterType9 = 156;
-	CounterType_PlaceholderCounterType10 = 157;
-	CounterType_PlaceholderCounterType11 = 158;
-	CounterType_PlaceholderCounterType12 = 159;
+	CounterType_PlaceholderCounterType147 = 147;
+	CounterType_PlaceholderCounterType148 = 148;
+	CounterType_PlaceholderCounterType149 = 149;
+	CounterType_PlaceholderCounterType150 = 150;
+	CounterType_PlaceholderCounterType151 = 151;
+	CounterType_PlaceholderCounterType152 = 152;
+	CounterType_PlaceholderCounterType153 = 153;
+	CounterType_PlaceholderCounterType154 = 154;
+	CounterType_PlaceholderCounterType155 = 155;
+	CounterType_PlaceholderCounterType156 = 156;
 }
 
 message CreateMatchGameRoomRequest {
@@ -1312,7 +1318,6 @@ message DeclareAttackersReq {
 	bool hasRestrictions = 3;
 	repeated AttackWarning attackWarnings = 4;
 	repeated ManaRequirement manaCost = 5;
-	repeated Attacker autoAttackers = 6;
 	repeated Attacker qualifiedAttackers = 7;
 }
 
@@ -1801,6 +1806,12 @@ enum GameObjectType {
 	GameObjectType_RevealedCard = 8;
 	GameObjectType_TriggerHolder = 9;
 	GameObjectType_Adventure = 10;
+	GameObjectType_MDFCBack = 11;
+	GameObjectType_Placeholder12 = 12;
+	GameObjectType_Placeholder13 = 13;
+	GameObjectType_Placeholder14 = 14;
+	GameObjectType_Placeholder15 = 15;
+	GameObjectType_Placeholder16 = 16;
 }
 
 enum GameRoomType {
@@ -1873,11 +1884,11 @@ enum GameVariant {
 	GameVariant_TeamVsTeam = 6;
 	GameVariant_TwoHeadedGiant = 7;
 	GameVariant_Brawl = 8;
-	GameVariant_Placeholder1 = 9;
-	GameVariant_Placeholder2 = 10;
-	GameVariant_Placeholder3 = 11;
-	GameVariant_Placeholder4 = 12;
-	GameVariant_Placeholder5 = 13;
+	GameVariant_Placeholder9 = 9;
+	GameVariant_Placeholder10 = 10;
+	GameVariant_Placeholder11 = 11;
+	GameVariant_Placeholder12 = 12;
+	GameVariant_Placeholder13 = 13;
 }
 
 message GatherReq {
@@ -2098,6 +2109,14 @@ message ManaPaymentCondition {
 	repeated ManaColor colors = 1;
 	repeated ManaSpecType specs = 2;
 	uint32 abilityGrpId = 3;
+	ManaPaymentConditionType type = 4;
+}
+
+enum ManaPaymentConditionType {
+	ManaPaymentConditionType_None = 0;
+	ManaPaymentConditionType_Threshold = 1;
+	ManaPaymentConditionType_Maximum = 2;
+	ManaPaymentConditionType_Diversity = 3;
 }
 
 message ManaPaymentOption {
@@ -2403,11 +2422,11 @@ enum MechanicType {
 	MechanicType_Main2Creature = 13;
 	MechanicType_DirectDamageCreature_Sorcery = 14;
 	MechanicType_DirectDamageCreature_Instant = 15;
-	MechanicType_Placeholder1 = 16;
-	MechanicType_Placeholder2 = 17;
-	MechanicType_Placeholder3 = 18;
-	MechanicType_Placeholder4 = 19;
-	MechanicType_Placeholder5 = 20;
+	MechanicType_Placeholder16 = 16;
+	MechanicType_Placeholder17 = 17;
+	MechanicType_Placeholder18 = 18;
+	MechanicType_Placeholder19 = 19;
+	MechanicType_Placeholder20 = 20;
 }
 
 message ModalOption {
@@ -2452,6 +2471,7 @@ message NumericInputReq {
 	uint32 maxValue = 3;
 	uint32 stepSize = 4;
 	uint32 sourceId = 5;
+	uint32 numericInputType = 6;
 }
 
 message NumericInputResp {
@@ -3598,11 +3618,11 @@ enum SubType {
 	SubType_Shark = 378;
 	SubType_Dog = 379;
 	SubType_Basri = 380;
-	SubType_PlaceholderSubType3 = 381;
-	SubType_PlaceholderSubType4 = 382;
-	SubType_PlaceholderSubType5 = 383;
-	SubType_PlaceholderSubType6 = 384;
-	SubType_PlaceholderSubType10 = 385;
+	SubType_PlaceholderSubType381 = 381;
+	SubType_PlaceholderSubType382 = 382;
+	SubType_PlaceholderSubType383 = 383;
+	SubType_PlaceholderSubType384 = 384;
+	SubType_PlaceholderSubType385 = 385;
 }
 
 enum SubZoneType {
