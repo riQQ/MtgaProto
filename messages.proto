@@ -2090,6 +2090,7 @@ enum ManaColor {
 	ManaColor_TwoGeneric = 10;
 	ManaColor_AnyColor = 11;
 	ManaColor_Colorless = 12;
+	ManaColor_Placeholder13 = 13;
 }
 
 message ManaInfo {
