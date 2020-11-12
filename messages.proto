@@ -649,6 +649,14 @@ message Blocker {
 	bool mustBlock = 6;
 }
 
+message BoolValue {
+	bool value = 1;
+}
+
+message BoolValues {
+	repeated bool values = 1;
+}
+
 message CLIPSConfiguration {
 	bool enableWatch = 1;
 	bool enableMetrics = 2;
@@ -1364,6 +1372,14 @@ message DistributionResp {
 	repeated Distribution distributions = 2;
 }
 
+message DoubleValue {
+	double value = 1;
+}
+
+message DoubleValues {
+	repeated double values = 1;
+}
+
 message DraftGameRoomConfig {
 	string gameRoomId = 1;
 	string eventId = 2;
@@ -1473,6 +1489,14 @@ message FinalMatchResult {
 	MatchCompletedReasonType matchCompletedReason = 3;
 	repeated ResultSpec resultList = 5;
 	string errorMessage = 10;
+}
+
+message FloatValue {
+	float value = 1;
+}
+
+message FloatValues {
+	repeated float values = 1;
 }
 
 message ForceDrawReq {
@@ -1843,6 +1867,8 @@ message GameStateMessage {
 	repeated TimerInfo timers = 13;
 	GameStateUpdate update = 14;
 	repeated ActionInfo actions = 15;
+	repeated AnnotationInfo persistentAnnotations = 16;
+	repeated uint32 diffDeletedPersistentAnnotationIds = 17;
 }
 
 message GameStateRedactorConfiguration {
@@ -2030,6 +2056,18 @@ message Int32Value {
 	int32 value = 1;
 }
 
+message Int32Values {
+	repeated int32 values = 1;
+}
+
+message Int64Value {
+	int64 value = 1;
+}
+
+message Int64Values {
+	repeated int64 values = 1;
+}
+
 message IntermissionReq {
 	repeated UserOption options = 1;
 	Prompt intermissionPrompt = 2;
@@ -2049,6 +2087,18 @@ message JoinMatchGameRoomResponse {
 
 message JoinMatchGameRoomResponseV2 {
 	int32 seatId = 1;
+}
+
+message KeyValuePair {
+	enum ValueOneofCase {
+		None = 0;
+		SingleValue = 2;
+		RepeatedValue = 3;
+	}
+
+	string key = 1;
+	SingleValue singleValue = 2;
+	RepeatedValue repeatedValue = 3;
 }
 
 message KeyValuePairInfo {
@@ -2511,7 +2561,7 @@ enum OptionContext {
 	OptionContext_TurnBased = 6;
 	OptionContext_Replacement = 7;
 	OptionContext_ActivateCast = 8;
-	OptionContext_TurnFaceUp = 9;
+	OptionContext_Special = 9;
 }
 
 enum OptionResponse {
@@ -2812,6 +2862,7 @@ enum ProtoVersion {
 	ProtoVersion_AutoTapSolution = 33;
 	ProtoVersion_ManaPaymentDeprecated = 34;
 	ProtoVersion_SelectFromGroupRespGroups = 35;
+	ProtoVersion_PersistentAnnotations = 36;
 }
 
 message Reference {
@@ -2827,6 +2878,29 @@ enum ReferenceType {
 	ReferenceType_CatalogId = 2;
 	ReferenceType_LocalizationId = 3;
 	ReferenceType_PlayerSeatId = 4;
+}
+
+message RepeatedValue {
+	enum ValuesOneofCase {
+		None = 0;
+		Uint32Values = 1;
+		Int32Values = 2;
+		Uint64Values = 3;
+		Int64Values = 4;
+		BoolValues = 5;
+		StringValues = 6;
+		FloatValues = 7;
+		DoubleValues = 8;
+	}
+
+	UInt32Values uint32Values = 1;
+	Int32Values int32Values = 2;
+	UInt64Values uint64Values = 3;
+	Int64Values int64Values = 4;
+	BoolValues boolValues = 5;
+	StringValues stringValues = 6;
+	FloatValues floatValues = 7;
+	DoubleValues doubleValues = 8;
 }
 
 message ReplacementEffect {
@@ -3165,6 +3239,29 @@ enum ShuffleRestriction {
 	ShuffleRestriction_All = 2;
 }
 
+message SingleValue {
+	enum ValueOneofCase {
+		None = 0;
+		Uint32Value = 1;
+		Int32Value = 2;
+		Uint64Value = 3;
+		Int64Value = 4;
+		BoolValue = 5;
+		StringValue = 6;
+		FloatValue = 7;
+		DoubleValue = 8;
+	}
+
+	uint32 uint32Value = 1;
+	int32 int32Value = 2;
+	uint64 uint64Value = 3;
+	int64 int64Value = 4;
+	bool boolValue = 5;
+	string stringValue = 6;
+	float floatValue = 7;
+	double doubleValue = 8;
+}
+
 enum SmartStopsSetting {
 	SmartStopsSetting_None = 0;
 	SmartStopsSetting_Enable = 1;
@@ -3237,6 +3334,14 @@ enum StopType {
 	StopType_PostcombatMainPhase = 9;
 	StopType_EndStep = 10;
 	StopType_FirstStrikeDamageStep = 11;
+}
+
+message StringValue {
+	string value = 1;
+}
+
+message StringValues {
+	repeated string values = 1;
 }
 
 enum SubType {
@@ -3891,6 +3996,18 @@ message UIMessage {
 
 message UInt32Value {
 	uint32 value = 1;
+}
+
+message UInt32Values {
+	repeated uint32 values = 1;
+}
+
+message UInt64Value {
+	uint64 value = 1;
+}
+
+message UInt64Values {
+	repeated uint64 values = 1;
 }
 
 message UserConnectionInfo {
