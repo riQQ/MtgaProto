@@ -4,7 +4,7 @@ const core = require('@actions/core');
 
 (async () => {
   try {
-    const response = await got('https://mtgarena.downloads.wizards.com/Live/Windows32/version');
+    const response = await got('https://mtgarena.downloads.wizards.com/Live/Windows64/version');
     console.log(`The response: ${response.body}`);
     const responseJson = JSON.parse(response.body);
     console.log(`Versions: ${JSON.stringify(responseJson.Versions)}`);
