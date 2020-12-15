@@ -358,6 +358,12 @@ enum AllowCancel {
 	AllowCancel_No = 3;
 }
 
+enum AllowFailToFind {
+	AllowFailToFind_None = 0;
+	AllowFailToFind_Any = 1;
+	AllowFailToFind_Zero = 2;
+}
+
 message AnnotationInfo {
 	uint32 id = 1;
 	uint32 affectorId = 2;
@@ -539,6 +545,7 @@ message AuthenticateRequest {
 message AuthenticateResponse {
 	string clientId = 1;
 	string sessionId = 2;
+	int32 inactivityTimeoutMs = 3;
 	string screenName = 10;
 }
 
@@ -777,10 +784,12 @@ message CastingTimeOptionReq {
 	uint32 playerIdToPrompt = 6;
 	bool isRequired = 7;
 	Prompt prompt = 8;
-	NumericInputReq numericInputReq = 9;
-	SelectManaTypeReq selectManaTypeReq = 10;
-	ModalReq modalReq = 11;
-	SelectNReq selectNReq = 12;
+	oneof message {
+		NumericInputReq numericInputReq = 9;
+		SelectManaTypeReq selectManaTypeReq = 10;
+		ModalReq modalReq = 11;
+		SelectNReq selectNReq = 12;
+	}
 	repeated ManaRequirement manaCost = 13;
 	AutoTapSolution autoTapSolution = 15;
 }
@@ -788,10 +797,12 @@ message CastingTimeOptionReq {
 message CastingTimeOptionResp {
 	uint32 ctoId = 1;
 	CastingTimeOptionType castingTimeOptionType = 2;
-	NumericInputResp numericInputResp = 3;
-	SelectManaTypeResp selectManaTypeResp = 4;
-	ChooseModalResp chooseModalResp = 5;
-	SelectNResp selectNResp = 6;
+	oneof message {
+		NumericInputResp numericInputResp = 3;
+		SelectManaTypeResp selectManaTypeResp = 4;
+		ChooseModalResp chooseModalResp = 5;
+		SelectNResp selectNResp = 6;
+	}
 }
 
 enum CastingTimeOptionType {
@@ -917,38 +928,40 @@ message ClientToGREMessage {
 	uint32 systemSeatId = 2;
 	uint32 gameStateId = 3;
 	uint32 respId = 4;
-	ConnectReq connectReq = 5;
-	CancelActionReq cancelActionReq = 6;
-	ConcedeReq concedeReq = 8;
-	ForceDrawReq forceDrawReq = 9;
-	GroupResp groupResp = 10;
-	MulliganResp mulliganResp = 11;
-	OptionalResp optionalResp = 12;
-	OrderResp orderResp = 13;
-	PerformActionResp performActionResp = 14;
-	SelectNResp selectNResp = 15;
-	SetSettingsReq setSettingsReq = 16;
-	ChooseStartingPlayerResp chooseStartingPlayerResp = 21;
-	DeclareAttackersResp declareAttackersResp = 22;
-	DeclareBlockersResp declareBlockersResp = 23;
-	OrderCombatDamageResp orderCombatDamageResp = 24;
-	AssignDamageResp assignDamageResp = 25;
-	SelectTargetsResp selectTargetsResp = 26;
-	SelectReplacementResp selectReplacementResp = 27;
-	SelectNGroupResp selectNGroupResp = 28;
-	DistributionResp distributionResp = 30;
-	NumericInputResp numericInputResp = 31;
-	SearchResp searchResp = 32;
-	EffectCostResp effectCostResp = 33;
-	CastingTimeOptionsResp castingTimeOptionsResp = 34;
-	SelectFromGroupsResp selectFromGroupsResp = 36;
-	SearchFromGroupsResp searchFromGroupsResp = 37;
-	GatherResp gatherResp = 38;
-	SubmitPaymentResp submitPaymentResp = 39;
-	UIMessage uiMessage = 40;
-	SubmitDeckResp submitDeckResp = 41;
-	ControlReq controlReq = 42;
-	PerformAutoTapActionsResp performAutoTapActionsResp = 43;
+	oneof message {
+		ConnectReq connectReq = 5;
+		CancelActionReq cancelActionReq = 6;
+		ConcedeReq concedeReq = 8;
+		ForceDrawReq forceDrawReq = 9;
+		GroupResp groupResp = 10;
+		MulliganResp mulliganResp = 11;
+		OptionalResp optionalResp = 12;
+		OrderResp orderResp = 13;
+		PerformActionResp performActionResp = 14;
+		SelectNResp selectNResp = 15;
+		SetSettingsReq setSettingsReq = 16;
+		ChooseStartingPlayerResp chooseStartingPlayerResp = 21;
+		DeclareAttackersResp declareAttackersResp = 22;
+		DeclareBlockersResp declareBlockersResp = 23;
+		OrderCombatDamageResp orderCombatDamageResp = 24;
+		AssignDamageResp assignDamageResp = 25;
+		SelectTargetsResp selectTargetsResp = 26;
+		SelectReplacementResp selectReplacementResp = 27;
+		SelectNGroupResp selectNGroupResp = 28;
+		DistributionResp distributionResp = 30;
+		NumericInputResp numericInputResp = 31;
+		SearchResp searchResp = 32;
+		EffectCostResp effectCostResp = 33;
+		CastingTimeOptionsResp castingTimeOptionsResp = 34;
+		SelectFromGroupsResp selectFromGroupsResp = 36;
+		SearchFromGroupsResp searchFromGroupsResp = 37;
+		GatherResp gatherResp = 38;
+		SubmitPaymentResp submitPaymentResp = 39;
+		UIMessage uiMessage = 40;
+		SubmitDeckResp submitDeckResp = 41;
+		ControlReq controlReq = 42;
+		PerformAutoTapActionsResp performAutoTapActionsResp = 43;
+	}
 	uint32 timerId = 100;
 }
 
@@ -1290,6 +1303,13 @@ enum DamageRecType {
 }
 
 message DamageRecipient {
+	enum IdOneofCase {
+		None = 0;
+		TeamId = 2;
+		PlayerSystemSeatId = 3;
+		PlaneswalkerInstanceId = 4;
+	}
+
 	DamageRecType type = 1;
 	uint32 teamId = 2;
 	uint32 playerSystemSeatId = 3;
@@ -1403,17 +1423,21 @@ message EdictalMessage {
 message EffectCostReq {
 	uint32 index = 1;
 	EffectCostType effectCostType = 3;
-	SelectNReq costSelection = 4;
-	SelectCountersReq counterSelection = 5;
-	SelectFromGroupsReq groupSelection = 6;
+	oneof message {
+		SelectNReq costSelection = 4;
+		SelectCountersReq counterSelection = 5;
+		SelectFromGroupsReq groupSelection = 6;
+	}
 }
 
 message EffectCostResp {
 	uint32 index = 1;
 	EffectCostType effectCostType = 2;
-	SelectNResp costSelection = 3;
-	SelectCountersResp counterSelection = 4;
-	SelectFromGroupsResp groupSelection = 5;
+	oneof message {
+		SelectNResp costSelection = 3;
+		SelectCountersResp counterSelection = 4;
+		SelectFromGroupsResp groupSelection = 5;
+	}
 }
 
 enum EffectCostType {
@@ -1521,27 +1545,14 @@ message GREConfiguration {
 }
 
 message GRECreateRequest {
-	uint32 greID = 1;
 	string matchID = 2;
-	uint32 gameID = 3;
 	uint32 majorVer = 4;
 	uint32 minorVer = 5;
 	uint32 revisionVer = 6;
 	uint32 buildVer = 7;
 }
 
-message GRECreateResponse {
-	uint32 greID = 1;
-	GRETHHostErrorCode result = 2;
-}
-
 message GREDestroyRequest {
-	uint32 greID = 1;
-}
-
-message GREDestroyResponse {
-	uint32 greID = 1;
-	GRETHHostErrorCode result = 2;
 }
 
 message GREElapseTimeRequest {
@@ -1659,20 +1670,6 @@ message GRETHHostEmulatorShutdownResp {
 	uint32 shutdownHostID = 2;
 }
 
-enum GRETHHostErrorCode {
-	GRETHHostErrorCode_Success = 0;
-	GRETHHostErrorCode_NullPayload = 1;
-	GRETHHostErrorCode_ParseFailed = 2;
-	GRETHHostErrorCode_IncompletePayload = 3;
-	GRETHHostErrorCode_GreCreateFailed = 4;
-	GRETHHostErrorCode_GreDestroyFailed = 5;
-	GRETHHostErrorCode_AICreateFailed = 6;
-	GRETHHostErrorCode_AIDestroyFailed = 7;
-	GRETHHostErrorCode_UnrecognizedGreID = 8;
-	GRETHHostErrorCode_InvalidPointer = 9;
-	GRETHHostErrorCode_UnknownError = 10;
-}
-
 message GRETickMessage {
 }
 
@@ -1702,50 +1699,52 @@ message GREToClientMessage {
 	repeated uint32 systemSeatIds = 2;
 	uint32 msgId = 3;
 	uint32 gameStateId = 4;
-	GameStateMessage gameStateMessage = 5;
+	oneof message {
+		GameStateMessage gameStateMessage = 5;
+		ChooseStartingPlayerReq chooseStartingPlayerReq = 7;
+		OptionalActionMessage optionalActionMessage = 8;
+		ActionsAvailableReq actionsAvailableReq = 9;
+		OrderReq orderReq = 10;
+		GroupReq groupReq = 11;
+		SelectNReq selectNReq = 12;
+		MulliganReq mulliganReq = 14;
+		GetSettingsResp getSettingsResp = 16;
+		SetSettingsResp setSettingsResp = 17;
+		ConnectResp connectResp = 18;
+		IllegalRequestMessage illegalRequestMessage = 19;
+		BinaryGameState binaryGameState = 23;
+		DeclareAttackersReq declareAttackersReq = 24;
+		SubmitAttackersResp submitAttackersResp = 25;
+		DeclareBlockersReq declareBlockersReq = 26;
+		SubmitBlockersResp submitBlockersResp = 27;
+		AssignDamageReq assignDamageReq = 28;
+		AssignDamageConfirmation assignDamageConfirmation = 29;
+		OrderCombatDamageReq orderCombatDamageReq = 30;
+		OrderDamageConfirmation orderDamageConfirmation = 31;
+		SelectTargetsReq selectTargetsReq = 32;
+		SubmitTargetsResp submitTargetsResp = 33;
+		PayCostsReq payCostsReq = 34;
+		IntermissionReq intermissionReq = 36;
+		DieRollResultsResp dieRollResultsResp = 37;
+		SelectReplacementReq selectReplacementReq = 38;
+		SelectNGroupReq selectNGroupReq = 39;
+		DistributionReq distributionReq = 41;
+		NumericInputReq numericInputReq = 42;
+		SearchReq searchReq = 43;
+		CastingTimeOptionsReq castingTimeOptionsReq = 44;
+		SelectFromGroupsReq selectFromGroupsReq = 47;
+		SearchFromGroupsReq searchFromGroupsReq = 48;
+		GatherReq gatherReq = 49;
+		UIMessage uiMessage = 51;
+		SubmitDeckReq submitDeckReq = 52;
+		EdictalMessage edictalMessage = 53;
+		TimeoutMessage timeoutMessage = 54;
+		TimerStateMessage timerStateMessage = 55;
+	}
 	Prompt prompt = 6;
-	ChooseStartingPlayerReq chooseStartingPlayerReq = 7;
-	OptionalActionMessage optionalActionMessage = 8;
-	ActionsAvailableReq actionsAvailableReq = 9;
-	OrderReq orderReq = 10;
-	GroupReq groupReq = 11;
-	SelectNReq selectNReq = 12;
-	MulliganReq mulliganReq = 14;
-	GetSettingsResp getSettingsResp = 16;
-	SetSettingsResp setSettingsResp = 17;
-	ConnectResp connectResp = 18;
-	IllegalRequestMessage illegalRequestMessage = 19;
-	BinaryGameState binaryGameState = 23;
-	DeclareAttackersReq declareAttackersReq = 24;
-	SubmitAttackersResp submitAttackersResp = 25;
-	DeclareBlockersReq declareBlockersReq = 26;
-	SubmitBlockersResp submitBlockersResp = 27;
-	AssignDamageReq assignDamageReq = 28;
-	AssignDamageConfirmation assignDamageConfirmation = 29;
-	OrderCombatDamageReq orderCombatDamageReq = 30;
-	OrderDamageConfirmation orderDamageConfirmation = 31;
-	SelectTargetsReq selectTargetsReq = 32;
-	SubmitTargetsResp submitTargetsResp = 33;
-	PayCostsReq payCostsReq = 34;
 	Prompt nonDecisionPlayerPrompt = 35;
-	IntermissionReq intermissionReq = 36;
-	DieRollResultsResp dieRollResultsResp = 37;
-	SelectReplacementReq selectReplacementReq = 38;
-	SelectNGroupReq selectNGroupReq = 39;
-	DistributionReq distributionReq = 41;
-	NumericInputReq numericInputReq = 42;
-	SearchReq searchReq = 43;
-	CastingTimeOptionsReq castingTimeOptionsReq = 44;
 	bool informationalUseOnly = 45;
-	SelectFromGroupsReq selectFromGroupsReq = 47;
-	SearchFromGroupsReq searchFromGroupsReq = 48;
-	GatherReq gatherReq = 49;
 	AllowCancel allowCancel = 50;
-	UIMessage uiMessage = 51;
-	SubmitDeckReq submitDeckReq = 52;
-	EdictalMessage edictalMessage = 53;
-	TimeoutMessage timeoutMessage = 54;
-	TimerStateMessage timerStateMessage = 55;
 	bool allowUndo = 56;
 }
 
@@ -2966,6 +2965,7 @@ message SearchFromGroupsReq {
 	repeated Group groups = 5;
 	GroupingStyle groupingStyle = 6;
 	uint32 sourceId = 7;
+	AllowFailToFind allowFailToFind = 8;
 }
 
 message SearchFromGroupsResp {
@@ -2983,6 +2983,7 @@ message SearchReq {
 	repeated uint32 itemsSought = 6;
 	uint32 sourceId = 7;
 	repeated uint32 additionalZones = 8;
+	AllowFailToFind allowFailToFind = 9;
 }
 
 message SearchResp {
@@ -3729,6 +3730,8 @@ enum SubType {
 	SubType_PlaceholderSubType383 = 383;
 	SubType_PlaceholderSubType384 = 384;
 	SubType_PlaceholderSubType385 = 385;
+	SubType_PlaceholderSubType386 = 386;
+	SubType_PlaceholderSubType387 = 387;
 }
 
 enum SubZoneType {
@@ -3987,11 +3990,13 @@ message TurnInfo {
 
 message UIMessage {
 	repeated uint32 seatIds = 1;
-	OnSelect onSelect = 2;
-	OnHover onHover = 3;
-	OnShuffle onShuffle = 4;
-	OnChat onChat = 5;
-	OnGenericEvent onGenericEvent = 6;
+	oneof message {
+		OnSelect onSelect = 2;
+		OnHover onHover = 3;
+		OnShuffle onShuffle = 4;
+		OnChat onChat = 5;
+		OnGenericEvent onGenericEvent = 6;
+	}
 }
 
 message UInt32Value {
