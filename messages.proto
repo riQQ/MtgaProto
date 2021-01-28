@@ -261,9 +261,9 @@ enum AbilityType {
 	AbilityType_Mill = 205;
 	AbilityType_ProtectionFromChosenName = 206;
 	AbilityType_MDFC = 207;
-	AbilityType_Placeholder208 = 208;
-	AbilityType_Placeholder209 = 209;
-	AbilityType_Placeholder210 = 210;
+	AbilityType_Foretell = 208;
+	AbilityType_Boast = 209;
+	AbilityType_SacrificeShard = 210;
 	AbilityType_Placeholder211 = 211;
 	AbilityType_Placeholder212 = 212;
 	AbilityType_AdornCards_Test = 987;
@@ -310,6 +310,7 @@ message Action {
 	uint32 maxActivations = 24;
 	bool isBatchable = 25;
 	ManaRequirement twobridGenericManaCost = 26;
+	uint32 highlight = 27;
 }
 
 message ActionInfo {
@@ -568,6 +569,7 @@ enum AutoPassOption {
 	AutoPassOption_ResolveMyStackEffects = 6;
 	AutoPassOption_FullControl = 7;
 	AutoPassOption_ArenaDefault = 8;
+	AutoPassOption_ResolveAll = 9;
 }
 
 enum AutoPassPriority {
@@ -1021,6 +1023,7 @@ message ConnectReq {
 	SettingsMessage defaultSettings = 5;
 	ProtoVersion protoVer = 6;
 	uint32 seatId = 7;
+	Version grpVersion = 8;
 }
 
 message ConnectResp {
@@ -1033,6 +1036,8 @@ message ConnectResp {
 	uint32 seatId = 7;
 	SettingsMessage settings = 8;
 	DeckMessage deckMessage = 9;
+	Version grpVersion = 10;
+	Version greVersion = 11;
 }
 
 enum ConnectionState {
@@ -1255,10 +1260,10 @@ enum CounterType {
 	CounterType_Foreshadow = 144;
 	CounterType_Incarnation = 145;
 	CounterType_Soul = 146;
-	CounterType_PlaceholderCounterType147 = 147;
-	CounterType_PlaceholderCounterType148 = 148;
-	CounterType_PlaceholderCounterType149 = 149;
-	CounterType_PlaceholderCounterType150 = 150;
+	CounterType_Voyage = 147;
+	CounterType_Ghostform = 148;
+	CounterType_Night = 149;
+	CounterType_Indestructible = 150;
 	CounterType_PlaceholderCounterType151 = 151;
 	CounterType_PlaceholderCounterType152 = 152;
 	CounterType_PlaceholderCounterType153 = 153;
@@ -2139,7 +2144,7 @@ enum ManaColor {
 	ManaColor_TwoGeneric = 10;
 	ManaColor_AnyColor = 11;
 	ManaColor_Colorless = 12;
-	ManaColor_Placeholder13 = 13;
+	ManaColor_Snow = 13;
 }
 
 message ManaInfo {
@@ -3026,6 +3031,7 @@ message SelectFromGroupsReq {
 	GroupingStyle groupingStyle = 7;
 	repeated uint32 unfilteredIds = 8;
 	uint32 sourceId = 9;
+	repeated uint32 zoneIds = 10;
 }
 
 message SelectFromGroupsResp {
@@ -3725,13 +3731,14 @@ enum SubType {
 	SubType_Shark = 378;
 	SubType_Dog = 379;
 	SubType_Basri = 380;
-	SubType_PlaceholderSubType381 = 381;
-	SubType_PlaceholderSubType382 = 382;
-	SubType_PlaceholderSubType383 = 383;
-	SubType_PlaceholderSubType384 = 384;
-	SubType_PlaceholderSubType385 = 385;
+	SubType_Rune = 381;
+	SubType_Tyvar = 382;
+	SubType_Phyrexian = 383;
+	SubType_Niko = 384;
+	SubType_Shard = 385;
 	SubType_PlaceholderSubType386 = 386;
 	SubType_PlaceholderSubType387 = 387;
+	SubType_PlaceholderSubType388 = 388;
 }
 
 enum SubZoneType {
@@ -3848,6 +3855,7 @@ message TestConfig {
 	AutoRespondPermission autoRespondPermission = 24;
 	bool disableDeferredActionCostPayment = 25;
 	bool disableIndividualDamageAssignments = 26;
+	bool disableHiFiSettings = 27;
 }
 
 message TimeoutConfig {
@@ -4035,6 +4043,13 @@ message ValueHeuristicDefinition {
 message ValueHeuristicParameter {
 	string id = 1;
 	int32 paramValue = 2;
+}
+
+message Version {
+	uint32 majorVersion = 1;
+	uint32 minorVersion = 2;
+	uint32 revisionVersion = 3;
+	uint32 buildVersion = 4;
 }
 
 enum Visibility {
