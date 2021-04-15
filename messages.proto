@@ -182,6 +182,9 @@ enum AnnotationType {
 	AnnotationType_TemporaryPermanent = 80;
 	AnnotationType_GamewideHistoryCount = 81;
 	AnnotationType_AbilityExhausted = 82;
+	AnnotationType_MultistepEffectStarted = 83;
+	AnnotationType_MultistepEffectComplete = 84;
+	AnnotationType_Placeholder85 = 85;
 }
 
 enum Answer {
@@ -290,7 +293,6 @@ enum AutoPassOption {
 	AutoPassOption_UnlessOpponentAction = 5;
 	AutoPassOption_ResolveMyStackEffects = 6;
 	AutoPassOption_FullControl = 7;
-	AutoPassOption_ArenaDefault = 8;
 	AutoPassOption_ResolveAll = 9;
 }
 
@@ -755,16 +757,13 @@ message ConnectReq {
 
 message ConnectResp {
 	ConnectionStatus status = 1;
-	uint32 majorVer = 2;
-	uint32 minorVer = 3;
-	uint32 revisionVer = 4;
-	uint32 buildVer = 5;
 	ProtoVersion protoVer = 6;
 	uint32 seatId = 7;
 	SettingsMessage settings = 8;
 	DeckMessage deckMessage = 9;
 	Version grpVersion = 10;
 	Version greVersion = 11;
+	repeated CardSkinTuple skins = 12;
 }
 
 enum ConnectionState {
@@ -1020,9 +1019,9 @@ enum CounterType {
 	CounterType_Ghostform = 148;
 	CounterType_Night = 149;
 	CounterType_Indestructible = 150;
-	CounterType_PlaceholderCounterType151 = 151;
-	CounterType_PlaceholderCounterType152 = 152;
-	CounterType_PlaceholderCounterType153 = 153;
+	CounterType_Hone = 151;
+	CounterType_Book = 152;
+	CounterType_Point = 153;
 	CounterType_PHCT154 = 154;
 	CounterType_PHCT155 = 155;
 	CounterType_PHCT156 = 156;
@@ -1544,6 +1543,7 @@ message GameInfo {
 	MulliganType mulliganType = 15;
 	uint32 freeMulliganCount = 16;
 	DeckConstraintInfo deckConstraintInfo = 17;
+	bool sideboardLoadingEnabled = 18;
 }
 
 message GameMetrics {
@@ -2507,12 +2507,19 @@ message Prompt {
 }
 
 message PromptParameter {
+	enum ValueOneofCase {
+		None = 0;
+		Reference = 3;
+		StringValue = 4;
+		NumberValue = 5;
+		PromptId = 7;
+	}
+
 	string parameterName = 1;
 	ParameterType type = 2;
 	Reference reference = 3;
 	string stringValue = 4;
 	int32 numberValue = 5;
-	repeated int32 repeatedNumbers = 6;
 	int32 promptId = 7;
 }
 
@@ -2559,8 +2566,6 @@ enum ProtoVersion {
 message Reference {
 	ReferenceType type = 1;
 	uint32 id = 2;
-	string field = 3;
-	string debugValue = 4;
 }
 
 enum ReferenceType {
@@ -2925,6 +2930,7 @@ message SettingsMessage {
 	repeated CosmeticInfo cosmetics = 16;
 	Setting autoSelectReplacementSetting = 17;
 	Setting autoDeclareAttackersThatMustAttackSetting = 18;
+	AutoPassOption stackAutoPassOption = 19;
 }
 
 enum ShuffleRestriction {
@@ -3418,22 +3424,23 @@ enum SubType {
 	SubType_Phyrexian = 383;
 	SubType_Niko = 384;
 	SubType_Shard = 385;
-	SubType_PlaceholderSubType386 = 386;
-	SubType_PlaceholderSubType387 = 387;
-	SubType_PlaceholderSubType388 = 388;
-	SubType_PHST389 = 389;
-	SubType_PHST390 = 390;
-	SubType_PHST391 = 391;
-	SubType_PHST392 = 392;
-	SubType_PHST393 = 393;
-	SubType_PHST394 = 394;
-	SubType_PHST395 = 395;
-	SubType_PHST396 = 396;
-	SubType_PHST397 = 397;
-	SubType_PHST398 = 398;
-	SubType_PHST399 = 399;
-	SubType_PHST400 = 400;
-	SubType_PHST401 = 401;
+	SubType_Inkling = 386;
+	SubType_Fractal = 387;
+	SubType_Lesson = 388;
+	SubType_PlaceholderSubType389 = 389;
+	SubType_PlaceholderSubType390 = 390;
+	SubType_PlaceholderSubType391 = 391;
+	SubType_PlaceholderSubType392 = 392;
+	SubType_PlaceholderSubType393 = 393;
+	SubType_PlaceholderSubType394 = 394;
+	SubType_PlaceholderSubType395 = 395;
+	SubType_PlaceholderSubType396 = 396;
+	SubType_PlaceholderSubType397 = 397;
+	SubType_PlaceholderSubType398 = 398;
+	SubType_PlaceholderSubType399 = 399;
+	SubType_PlaceholderSubType400 = 400;
+	SubType_PlaceholderSubType401 = 401;
+	SubType_PlaceholderSubType402 = 402;
 }
 
 enum SubZoneType {
@@ -3551,6 +3558,7 @@ message TestConfig {
 	bool disableDeferredActionCostPayment = 25;
 	bool disableIndividualDamageAssignments = 26;
 	bool disableHiFiSettings = 27;
+	bool enableSideboardLoading = 28;
 }
 
 message TimeoutConfig {
