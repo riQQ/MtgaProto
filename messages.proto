@@ -504,6 +504,9 @@ enum CardType {
 	CardType_Sorcery = 10;
 	CardType_Tribal = 11;
 	CardType_Vanguard = 12;
+	CardType_CardTypePlaceholder13 = 13;
+	CardType_CardTypePlaceholder14 = 14;
+	CardType_CardTypePlaceholder15 = 15;
 }
 
 message CastingTimeOptionReq {
@@ -1813,6 +1816,7 @@ enum IdType {
 	IdType_InstanceId = 1;
 	IdType_PromptParameterIndex = 2;
 	IdType_ZoneInstanceId = 3;
+	IdType_CardGrpId = 4;
 }
 
 message IllegalRequestMessage {
@@ -1990,6 +1994,7 @@ enum ManaSpecType {
 	ManaSpecType_FromSnow = 6;
 	ManaSpecType_DoesNotEmpty = 7;
 	ManaSpecType_AdditionalEffect = 8;
+	ManaSpecType_Placeholder9 = 9;
 }
 
 enum MatchCompletedReasonType {
@@ -3508,6 +3513,7 @@ message TargetSelection {
 	uint32 maxTargets = 4;
 	uint32 selectedTargets = 5;
 	Prompt prompt = 6;
+	uint32 targetSourceZoneId = 7;
 }
 
 enum TargetType {
