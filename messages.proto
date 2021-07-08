@@ -184,7 +184,10 @@ enum AnnotationType {
 	AnnotationType_AbilityExhausted = 82;
 	AnnotationType_MultistepEffectStarted = 83;
 	AnnotationType_MultistepEffectComplete = 84;
-	AnnotationType_Placeholder85 = 85;
+	AnnotationType_DieRoll = 85;
+	AnnotationType_DungeonStatus = 86;
+	AnnotationType_LinkedDamage = 87;
+	AnnotationType_ClassLevel = 88;
 }
 
 enum Answer {
@@ -504,7 +507,7 @@ enum CardType {
 	CardType_Sorcery = 10;
 	CardType_Tribal = 11;
 	CardType_Vanguard = 12;
-	CardType_CardTypePlaceholder13 = 13;
+	CardType_Dungeon = 13;
 	CardType_CardTypePlaceholder14 = 14;
 	CardType_CardTypePlaceholder15 = 15;
 }
@@ -1025,12 +1028,18 @@ enum CounterType {
 	CounterType_Hone = 151;
 	CounterType_Book = 152;
 	CounterType_Point = 153;
-	CounterType_PHCT154 = 154;
-	CounterType_PHCT155 = 155;
-	CounterType_PHCT156 = 156;
+	CounterType_Enlightened = 154;
+	CounterType_Harmony = 155;
+	CounterType_Void = 156;
 	CounterType_PHCT157 = 157;
 	CounterType_PHCT158 = 158;
 	CounterType_PHCT159 = 159;
+	CounterType_PHCT160 = 160;
+	CounterType_PHCT161 = 161;
+	CounterType_PHCT162 = 162;
+	CounterType_PHCT163 = 163;
+	CounterType_PHCT164 = 164;
+	CounterType_PHCT165 = 165;
 }
 
 message CreateMatchGameRoomRequest {
@@ -1587,6 +1596,7 @@ message GameObjectInfo {
 	UInt32Value loyaltyUsed = 35;
 	repeated uint32 abilityOriginalCardGrpIds = 36;
 	string baseSkinCode = 37;
+	repeated SubType removedSubtypes = 38;
 }
 
 enum GameObjectType {
@@ -1817,6 +1827,7 @@ enum IdType {
 	IdType_PromptParameterIndex = 2;
 	IdType_ZoneInstanceId = 3;
 	IdType_CardGrpId = 4;
+	IdType_AbilityGrpId = 5;
 }
 
 message IllegalRequestMessage {
@@ -1994,7 +2005,7 @@ enum ManaSpecType {
 	ManaSpecType_FromSnow = 6;
 	ManaSpecType_DoesNotEmpty = 7;
 	ManaSpecType_AdditionalEffect = 8;
-	ManaSpecType_Placeholder9 = 9;
+	ManaSpecType_FromTreasure = 9;
 }
 
 enum MatchCompletedReasonType {
@@ -3432,20 +3443,21 @@ enum SubType {
 	SubType_Inkling = 386;
 	SubType_Fractal = 387;
 	SubType_Lesson = 388;
-	SubType_PlaceholderSubType389 = 389;
-	SubType_PlaceholderSubType390 = 390;
-	SubType_PlaceholderSubType391 = 391;
-	SubType_PlaceholderSubType392 = 392;
-	SubType_PlaceholderSubType393 = 393;
-	SubType_PlaceholderSubType394 = 394;
-	SubType_PlaceholderSubType395 = 395;
-	SubType_PlaceholderSubType396 = 396;
-	SubType_PlaceholderSubType397 = 397;
-	SubType_PlaceholderSubType398 = 398;
-	SubType_PlaceholderSubType399 = 399;
-	SubType_PlaceholderSubType400 = 400;
-	SubType_PlaceholderSubType401 = 401;
+	SubType_Bard = 389;
+	SubType_Beholder = 390;
+	SubType_Gnoll = 391;
+	SubType_Hamster = 392;
+	SubType_Halfling = 393;
+	SubType_Tiefling = 394;
+	SubType_Bahamut = 395;
+	SubType_Ellywick = 396;
+	SubType_Lolth = 397;
+	SubType_Mordenkainen = 398;
+	SubType_Zariel = 399;
+	SubType_Class = 400;
+	SubType_Ranger = 401;
 	SubType_PlaceholderSubType402 = 402;
+	SubType_PlaceholderSubType403 = 403;
 }
 
 enum SubZoneType {
@@ -3671,6 +3683,7 @@ enum TimerPackage {
 	TimerPackage_DirectChallenge = 6;
 	TimerPackage_Default = 7;
 	TimerPackage_BestOfThree = 8;
+	TimerPackage_BestOfOneMatchClock = 9;
 }
 
 message TimerStateMessage {
