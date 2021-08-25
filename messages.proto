@@ -508,8 +508,6 @@ enum CardType {
 	CardType_Tribal = 11;
 	CardType_Vanguard = 12;
 	CardType_Dungeon = 13;
-	CardType_CardTypePlaceholder14 = 14;
-	CardType_CardTypePlaceholder15 = 15;
 }
 
 message CastingTimeOptionReq {
@@ -1039,7 +1037,7 @@ enum CounterType {
 	CounterType_PHCT162 = 162;
 	CounterType_PHCT163 = 163;
 	CounterType_PHCT164 = 164;
-	CounterType_PHCT165 = 165;
+	CounterType_Acorn = 165;
 }
 
 message CreateMatchGameRoomRequest {
@@ -1207,6 +1205,7 @@ message EffectCostReq {
 		SelectNReq costSelection = 4;
 		SelectCountersReq counterSelection = 5;
 		SelectFromGroupsReq groupSelection = 6;
+		GatherReq gatherReq = 7;
 	}
 }
 
@@ -1217,6 +1216,7 @@ message EffectCostResp {
 		SelectNResp costSelection = 3;
 		SelectCountersResp counterSelection = 4;
 		SelectFromGroupsResp groupSelection = 5;
+		GatherResp gatherResp = 38;
 	}
 }
 
@@ -1226,6 +1226,7 @@ enum EffectCostType {
 	EffectCostType_SelectCounter = 2;
 	EffectCostType_Autoselect = 3;
 	EffectCostType_SelectFromGroups = 4;
+	EffectCostType_GatherCounters = 5;
 }
 
 enum FailureReason {
@@ -1702,6 +1703,7 @@ message GatherReq {
 	uint32 optionIndex = 1;
 	uint32 destinationId = 2;
 	repeated GatherSource sources = 3;
+	uint32 amountToGather = 4;
 }
 
 message GatherResp {
@@ -3458,6 +3460,7 @@ enum SubType {
 	SubType_Ranger = 401;
 	SubType_PlaceholderSubType402 = 402;
 	SubType_PlaceholderSubType403 = 403;
+	SubType_Serra = 404;
 }
 
 enum SubZoneType {
