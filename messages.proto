@@ -93,7 +93,7 @@ message AnnotationInfo {
 	repeated uint32 affectedIds = 3;
 	repeated AnnotationType type = 4;
 	repeated KeyValuePairInfo details = 6;
-	bool allowRedaction = 7;
+	bool redactAffector = 7;
 	repeated uint32 ignoreForSeatIds = 8;
 	bool redactAffected = 9;
 }
