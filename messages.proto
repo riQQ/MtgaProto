@@ -1029,15 +1029,18 @@ enum CounterType {
 	CounterType_Enlightened = 154;
 	CounterType_Harmony = 155;
 	CounterType_Void = 156;
-	CounterType_PHCT157 = 157;
-	CounterType_PHCT158 = 158;
-	CounterType_PHCT159 = 159;
+	CounterType_Ember = 157;
+	CounterType_Ritual = 158;
+	CounterType_Valor = 159;
 	CounterType_PHCT160 = 160;
 	CounterType_PHCT161 = 161;
 	CounterType_PHCT162 = 162;
 	CounterType_PHCT163 = 163;
 	CounterType_PHCT164 = 164;
 	CounterType_Acorn = 165;
+	CounterType_PHCT166 = 166;
+	CounterType_PHCT167 = 167;
+	CounterType_PHCT168 = 168;
 }
 
 message CreateMatchGameRoomRequest {
@@ -1420,37 +1423,6 @@ message GREStartMatchRequest {
 	MatchConfig matchConfig = 1;
 }
 
-message GRETHHostEmulatorLaunch {
-	string programName = 1;
-	string executablePath = 2;
-	string sharedLibraryFilename = 3;
-	string greIRFilename = 4;
-	uint32 linkID = 5;
-	uint32 hostID = 6;
-	uint32 sutID = 7;
-	string logFilename = 8;
-	string syslogIPAddress = 9;
-	string syslogTCPPort = 10;
-	string syslogProcID = 11;
-	string outFilename = 12;
-	bool enableRedaction = 13;
-}
-
-message GRETHHostEmulatorLaunchResp {
-	uint32 result = 1;
-	uint32 hostID = 2;
-	int32 pID = 3;
-}
-
-message GRETHHostEmulatorShutdown {
-	uint32 shutdownHostID = 1;
-}
-
-message GRETHHostEmulatorShutdownResp {
-	uint32 result = 1;
-	uint32 shutdownHostID = 2;
-}
-
 message GRETickMessage {
 }
 
@@ -1613,7 +1585,7 @@ enum GameObjectType {
 	GameObjectType_TriggerHolder = 9;
 	GameObjectType_Adventure = 10;
 	GameObjectType_MDFCBack = 11;
-	GameObjectType_Placeholder12 = 12;
+	GameObjectType_DisturbBack = 12;
 	GameObjectType_Placeholder13 = 13;
 	GameObjectType_Placeholder14 = 14;
 	GameObjectType_Placeholder15 = 15;
@@ -3458,9 +3430,10 @@ enum SubType {
 	SubType_Zariel = 399;
 	SubType_Class = 400;
 	SubType_Ranger = 401;
-	SubType_PlaceholderSubType402 = 402;
+	SubType_Wrenn = 402;
 	SubType_PlaceholderSubType403 = 403;
 	SubType_Serra = 404;
+	SubType_PlaceholderSubType405 = 405;
 }
 
 enum SubZoneType {
