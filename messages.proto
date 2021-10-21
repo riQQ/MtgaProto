@@ -34,6 +34,8 @@ message Action {
 	uint32 highlight = 27;
 	repeated Cost costs = 28;
 	repeated AutoTapResource resources = 29;
+	uint32 timingSourceGrpid = 30;
+	uint32 uniqueAbilityId = 31;
 }
 
 message ActionInfo {
@@ -188,6 +190,7 @@ enum AnnotationType {
 	AnnotationType_DungeonStatus = 86;
 	AnnotationType_LinkedDamage = 87;
 	AnnotationType_ClassLevel = 88;
+	AnnotationType_TokenImmediatelyDied = 89;
 }
 
 enum Answer {
@@ -555,6 +558,7 @@ enum CastingTimeOptionType {
 	CastingTimeOptionType_ChooseOrCost = 11;
 	CastingTimeOptionType_Selection = 12;
 	CastingTimeOptionType_CastThroughAbility = 13;
+	CastingTimeOptionType_TimingPermission = 14;
 }
 
 message CastingTimeOptionsReq {
@@ -647,6 +651,7 @@ enum ClientMessageType {
 	ClientMessageType_SubmitDeckResp = 54;
 	ClientMessageType_TakeTimeoutReq = 55;
 	ClientMessageType_PerformAutoTapActionsResp = 56;
+	ClientMessageType_StringInputResp = 57;
 }
 
 message ClientSessionInfo {
@@ -696,6 +701,7 @@ message ClientToGREMessage {
 		SubmitDeckResp submitDeckResp = 41;
 		ControlReq controlReq = 42;
 		PerformAutoTapActionsResp performAutoTapActionsResp = 43;
+		StringInputResp stringInputResp = 44;
 	}
 	uint32 timerId = 100;
 }
@@ -1403,6 +1409,7 @@ enum GREMessageType {
 	GREMessageType_TimeoutMessage = 55;
 	GREMessageType_TimerStateMessage = 56;
 	GREMessageType_SubmitDeckConfirmation = 57;
+	GREMessageType_StringInputReq = 58;
 }
 
 message GREResumeMatchRequest {
@@ -1493,9 +1500,9 @@ message GREToClientMessage {
 		EdictalMessage edictalMessage = 53;
 		TimeoutMessage timeoutMessage = 54;
 		TimerStateMessage timerStateMessage = 55;
+		StringInputReq stringInputReq = 57;
 	}
 	Prompt prompt = 6;
-	Prompt nonDecisionPlayerPrompt = 35;
 	bool informationalUseOnly = 45;
 	AllowCancel allowCancel = 50;
 	bool allowUndo = 56;
@@ -2270,12 +2277,20 @@ message NumericInputReq {
 	uint32 maxValue = 3;
 	uint32 stepSize = 4;
 	uint32 sourceId = 5;
-	uint32 numericInputType = 6;
+	NumericInputType numericInputType = 6;
 }
 
 message NumericInputResp {
 	uint32 optionIndex = 1;
 	uint32 numericInputValue = 2;
+}
+
+enum NumericInputType {
+	NumericInputType_None = 0;
+	NumericInputType_ChooseX = 1;
+	NumericInputType_ChooseAnyAmount = 2;
+	NumericInputType_DebugCode = 3;
+	NumericInputType_ChooseDieRoll = 4;
 }
 
 message OnChat {
@@ -2325,7 +2340,7 @@ enum OptionType {
 	OptionType_Splice = 2;
 	OptionType_AlternativeCost = 3;
 	OptionType_Numeric = 4;
-	OptionType_VariableCost = 5;
+	OptionType_String = 5;
 	OptionType_ManaType = 6;
 	OptionType_Order = 7;
 	OptionType_Search = 8;
@@ -2595,6 +2610,7 @@ message ReplacementEffect {
 	uint32 abilityGrpId = 4;
 	uint32 affectedObject = 5;
 	uint32 replacementEffectId = 6;
+	uint32 conferringObjectZcid = 7;
 }
 
 message ReportResultMessage {
@@ -3019,6 +3035,15 @@ enum StopType {
 	StopType_PostcombatMainPhase = 9;
 	StopType_EndStep = 10;
 	StopType_FirstStrikeDamageStep = 11;
+}
+
+message StringInputReq {
+	uint32 optionIndex = 1;
+	uint32 sourceId = 2;
+}
+
+message StringInputResp {
+	string inputValue = 1;
 }
 
 message StringValue {
@@ -3553,6 +3578,7 @@ message TestConfig {
 	bool disableIndividualDamageAssignments = 26;
 	bool disableHiFiSettings = 27;
 	bool enableSideboardLoading = 28;
+	bool disableUniqueAbilityActivations = 29;
 }
 
 message TimeoutConfig {
