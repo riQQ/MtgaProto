@@ -1038,11 +1038,11 @@ enum CounterType {
 	CounterType_Ember = 157;
 	CounterType_Ritual = 158;
 	CounterType_Valor = 159;
-	CounterType_PHCT160 = 160;
-	CounterType_PHCT161 = 161;
-	CounterType_PHCT162 = 162;
-	CounterType_PHCT163 = 163;
-	CounterType_PHCT164 = 164;
+	CounterType_Judgment = 160;
+	CounterType_Invitation = 161;
+	CounterType_Croak = 162;
+	CounterType_Bloodline = 163;
+	CounterType_Suspect = 164;
 	CounterType_Acorn = 165;
 	CounterType_PHCT166 = 166;
 	CounterType_PHCT167 = 167;
@@ -3456,7 +3456,7 @@ enum SubType {
 	SubType_Class = 400;
 	SubType_Ranger = 401;
 	SubType_Wrenn = 402;
-	SubType_PlaceholderSubType403 = 403;
+	SubType_Blood = 403;
 	SubType_Serra = 404;
 	SubType_PlaceholderSubType405 = 405;
 }
