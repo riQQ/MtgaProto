@@ -191,6 +191,7 @@ enum AnnotationType {
 	AnnotationType_LinkedDamage = 87;
 	AnnotationType_ClassLevel = 88;
 	AnnotationType_TokenImmediatelyDied = 89;
+	AnnotationType_DamagedThisTurn = 90;
 }
 
 enum Answer {
@@ -3459,6 +3460,7 @@ enum SubType {
 	SubType_Blood = 403;
 	SubType_Serra = 404;
 	SubType_PlaceholderSubType405 = 405;
+	SubType_PlaceholderSubType406 = 406;
 }
 
 enum SubZoneType {
