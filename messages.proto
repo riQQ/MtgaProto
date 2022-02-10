@@ -36,6 +36,7 @@ message Action {
 	repeated AutoTapResource resources = 29;
 	uint32 timingSourceGrpid = 30;
 	uint32 uniqueAbilityId = 31;
+	repeated uint32 consumableCostAdjustmentQualificationIds = 32;
 }
 
 message ActionInfo {
@@ -87,6 +88,10 @@ enum AllowFailToFind {
 	AllowFailToFind_None = 0;
 	AllowFailToFind_Any = 1;
 	AllowFailToFind_Zero = 2;
+}
+
+message AndCost {
+	repeated Cost costs = 1;
 }
 
 message AnnotationInfo {
@@ -769,7 +774,6 @@ message ConnectReq {
 message ConnectResp {
 	ConnectionStatus status = 1;
 	ProtoVersion protoVer = 6;
-	uint32 seatId = 7;
 	SettingsMessage settings = 8;
 	DeckMessage deckMessage = 9;
 	Version grpVersion = 10;
@@ -843,6 +847,8 @@ message Cost {
 		EffectCost effectCost = 8;
 		LifeCost lifeCost = 9;
 		LoyaltyCost loyaltyCost = 10;
+		OrCost orCost = 11;
+		AndCost andCost = 12;
 	}
 }
 
@@ -865,6 +871,7 @@ enum CostType {
 	CostType_ExileSelf = 8;
 	CostType_UntapSelf = 9;
 	CostType_Or = 10;
+	CostType_And = 11;
 }
 
 message Counter {
@@ -1045,7 +1052,7 @@ enum CounterType {
 	CounterType_Bloodline = 163;
 	CounterType_Suspect = 164;
 	CounterType_Acorn = 165;
-	CounterType_PHCT166 = 166;
+	CounterType_Hatching = 166;
 	CounterType_PHCT167 = 167;
 	CounterType_PHCT168 = 168;
 }
@@ -1296,6 +1303,7 @@ enum FailureReason {
 	FailureReason_UnexpectedAttackers = 53;
 	FailureReason_InvalidParity = 54;
 	FailureReason_InvalidAlternativeAttackModification = 55;
+	FailureReason_DisallowedValue = 56;
 }
 
 message FinalMatchResult {
@@ -2279,6 +2287,7 @@ message NumericInputReq {
 	uint32 stepSize = 4;
 	uint32 sourceId = 5;
 	NumericInputType numericInputType = 6;
+	repeated uint32 disallowedValues = 7;
 }
 
 message NumericInputResp {
@@ -2369,6 +2378,11 @@ message OptionalResp {
 	ChoicePersistence persistence = 2;
 	SettingScope appliesTo = 3;
 	SettingKey mapTo = 4;
+}
+
+message OrCost {
+	repeated Cost costs = 1;
+	bool isOptional = 2;
 }
 
 message OrderCombatDamageReq {
@@ -3459,7 +3473,7 @@ enum SubType {
 	SubType_Wrenn = 402;
 	SubType_Blood = 403;
 	SubType_Serra = 404;
-	SubType_PlaceholderSubType405 = 405;
+	SubType_Kaito = 405;
 	SubType_PlaceholderSubType406 = 406;
 }
 
