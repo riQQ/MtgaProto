@@ -416,6 +416,8 @@ message CLIPSConfiguration {
 	int32 warningFiringLimit = 6;
 	string metricsFile = 7;
 	string logFile = 8;
+	bool metricsFileAppend = 9;
+	bool logFileAppend = 10;
 }
 
 message CancelActionReq {
@@ -565,6 +567,7 @@ enum CastingTimeOptionType {
 	CastingTimeOptionType_Selection = 12;
 	CastingTimeOptionType_CastThroughAbility = 13;
 	CastingTimeOptionType_TimingPermission = 14;
+	CastingTimeOptionType_PlaceHolder15 = 15;
 }
 
 message CastingTimeOptionsReq {
@@ -1818,6 +1821,7 @@ enum IdType {
 	IdType_ZoneInstanceId = 3;
 	IdType_CardGrpId = 4;
 	IdType_AbilityGrpId = 5;
+	IdType_CardGrpIdIndex = 6;
 }
 
 message IllegalRequestMessage {
@@ -2140,6 +2144,7 @@ message MatchGameRoomPlayerInfo {
 	string courseId = 10;
 	string deckId = 11;
 	string clientAuthToken = 12;
+	bool isWotc = 14;
 	int64 joinTimestamp = 20;
 	int64 inactivityTimeoutTimestamp = 21;
 	int64 disconnectTimeoutTimestamp = 22;
