@@ -33,7 +33,6 @@ message Action {
 	ManaRequirement twobridGenericManaCost = 26;
 	uint32 highlight = 27;
 	repeated Cost costs = 28;
-	repeated AutoTapResource resources = 29;
 	uint32 timingSourceGrpid = 30;
 	uint32 uniqueAbilityId = 31;
 	repeated uint32 consumableCostAdjustmentQualificationIds = 32;
@@ -330,11 +329,6 @@ message AutoTapActionsAvailableReq {
 	repeated AutoTapSolution autoTapSolutions = 2;
 }
 
-message AutoTapResource {
-	uint32 objectId = 1;
-	CounterType counterType = 2;
-}
-
 message AutoTapSolution {
 	repeated AutoTapAction autoTapActions = 1;
 	repeated ManaPaymentCondition manaPaymentConditions = 2;
@@ -567,7 +561,8 @@ enum CastingTimeOptionType {
 	CastingTimeOptionType_Selection = 12;
 	CastingTimeOptionType_CastThroughAbility = 13;
 	CastingTimeOptionType_TimingPermission = 14;
-	CastingTimeOptionType_PlaceHolder15 = 15;
+	CastingTimeOptionType_Casualty = 15;
+	CastingTimeOptionType_Placeholder16 = 16;
 }
 
 message CastingTimeOptionsReq {
@@ -661,6 +656,7 @@ enum ClientMessageType {
 	ClientMessageType_TakeTimeoutReq = 55;
 	ClientMessageType_PerformAutoTapActionsResp = 56;
 	ClientMessageType_StringInputResp = 57;
+	ClientMessageType_SelectCountersResp = 58;
 }
 
 message ClientSessionInfo {
@@ -711,6 +707,7 @@ message ClientToGREMessage {
 		ControlReq controlReq = 42;
 		PerformAutoTapActionsResp performAutoTapActionsResp = 43;
 		StringInputResp stringInputResp = 44;
+		SelectCountersResp selectCountersResp = 45;
 	}
 	uint32 timerId = 100;
 }
@@ -844,7 +841,6 @@ message Cost {
 	uint32 objectId = 3;
 	uint32 abilityGrpId = 4;
 	uint32 index = 5;
-	uint32 weight = 6;
 	oneof message {
 		ManaCost manaCost = 7;
 		EffectCost effectCost = 8;
@@ -867,7 +863,7 @@ enum CostType {
 	CostType_Mana = 1;
 	CostType_TapSelf = 2;
 	CostType_SacSelf = 3;
-	CostType_Action = 4;
+	CostType_Effect = 4;
 	CostType_Loyalty = 5;
 	CostType_DiscardSelf = 6;
 	CostType_Life = 7;
@@ -1056,8 +1052,12 @@ enum CounterType {
 	CounterType_Suspect = 164;
 	CounterType_Acorn = 165;
 	CounterType_Hatching = 166;
-	CounterType_PHCT167 = 167;
-	CounterType_PHCT168 = 168;
+	CounterType_Stash = 167;
+	CounterType_Collection = 168;
+	CounterType_PlaceHolderCounterType169 = 169;
+	CounterType_PlaceHolderCounterType170 = 170;
+	CounterType_PlaceHolderCounterType171 = 171;
+	CounterType_PlaceHolderCounterType172 = 172;
 }
 
 message CreateMatchGameRoomRequest {
@@ -1216,6 +1216,7 @@ message EdictalMessage {
 message EffectCost {
 	repeated CardMechanicType cardMechanicTypes = 1;
 	EffectCostType effectCostType = 2;
+	int32 count = 3;
 }
 
 message EffectCostReq {
@@ -1422,6 +1423,7 @@ enum GREMessageType {
 	GREMessageType_TimerStateMessage = 56;
 	GREMessageType_SubmitDeckConfirmation = 57;
 	GREMessageType_StringInputReq = 58;
+	GREMessageType_SelectCountersReq = 59;
 }
 
 message GREResumeMatchRequest {
@@ -1513,6 +1515,7 @@ message GREToClientMessage {
 		TimeoutMessage timeoutMessage = 54;
 		TimerStateMessage timerStateMessage = 55;
 		StringInputReq stringInputReq = 57;
+		SelectCountersReq selectCountersReq = 58;
 	}
 	Prompt prompt = 6;
 	bool informationalUseOnly = 45;
@@ -1605,7 +1608,7 @@ enum GameObjectType {
 	GameObjectType_Adventure = 10;
 	GameObjectType_MDFCBack = 11;
 	GameObjectType_DisturbBack = 12;
-	GameObjectType_Placeholder13 = 13;
+	GameObjectType_Boon = 13;
 	GameObjectType_Placeholder14 = 14;
 	GameObjectType_Placeholder15 = 15;
 	GameObjectType_Placeholder16 = 16;
@@ -2144,7 +2147,9 @@ message MatchGameRoomPlayerInfo {
 	string courseId = 10;
 	string deckId = 11;
 	string clientAuthToken = 12;
+	string sessionId = 13;
 	bool isWotc = 14;
+	string platformId = 15;
 	int64 joinTimestamp = 20;
 	int64 inactivityTimeoutTimestamp = 21;
 	int64 disconnectTimeoutTimestamp = 22;
@@ -2368,6 +2373,7 @@ enum OptionType {
 	OptionType_SelectFromGroups = 15;
 	OptionType_SearchFromGroups = 16;
 	OptionType_Gathering = 17;
+	OptionType_SelectCounters = 18;
 }
 
 message OptionalActionMessage {
@@ -3479,7 +3485,12 @@ enum SubType {
 	SubType_Blood = 403;
 	SubType_Serra = 404;
 	SubType_Kaito = 405;
-	SubType_PlaceholderSubType406 = 406;
+	SubType_Raccoon = 406;
+	SubType_PlaceholderSubType407 = 407;
+	SubType_PlaceholderSubType408 = 408;
+	SubType_PlaceholderSubType409 = 409;
+	SubType_PlaceholderSubType410 = 410;
+	SubType_PlaceholderSubType411 = 411;
 }
 
 enum SubZoneType {
