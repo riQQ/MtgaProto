@@ -14,6 +14,7 @@ message Action {
 	ActionType actionType = 1;
 	uint32 grpId = 2;
 	uint32 instanceId = 3;
+	uint32 facetId = 4;
 	uint32 abilityGrpId = 6;
 	uint32 sourceId = 8;
 	uint32 alternativeGrpId = 9;
@@ -196,6 +197,7 @@ enum AnnotationType {
 	AnnotationType_ClassLevel = 88;
 	AnnotationType_TokenImmediatelyDied = 89;
 	AnnotationType_DamagedThisTurn = 90;
+	AnnotationType_ReferencedCardNames = 91;
 }
 
 enum Answer {
@@ -2150,6 +2152,7 @@ message MatchGameRoomPlayerInfo {
 	string sessionId = 13;
 	bool isWotc = 14;
 	string platformId = 15;
+	bool isBotPlayer = 16;
 	int64 joinTimestamp = 20;
 	int64 inactivityTimeoutTimestamp = 21;
 	int64 disconnectTimeoutTimestamp = 22;
@@ -3491,6 +3494,7 @@ enum SubType {
 	SubType_PlaceholderSubType409 = 409;
 	SubType_PlaceholderSubType410 = 410;
 	SubType_PlaceholderSubType411 = 411;
+	SubType_PlaceholderSubType412 = 412;
 }
 
 enum SubZoneType {
