@@ -69,6 +69,7 @@ jobs:
           echo "::set-output name=protoPath::$($protoFile.FullName)"
         working-directory: ${{github.workspace}}\..\proto-extractor\extractor
       - name: Commit proto
+        if: github.ref_name == 'master'
         run: |
           # full error details
           $ErrorView = 'NormalView'
