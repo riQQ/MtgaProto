@@ -198,6 +198,8 @@ enum AnnotationType {
 	AnnotationType_TokenImmediatelyDied = 89;
 	AnnotationType_DamagedThisTurn = 90;
 	AnnotationType_ReferencedCardNames = 91;
+	AnnotationType_PlayerSelectingTargets = 92;
+	AnnotationType_PlayerSubmittedTargets = 93;
 }
 
 enum Answer {
