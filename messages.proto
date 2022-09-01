@@ -200,6 +200,7 @@ enum AnnotationType {
 	AnnotationType_ReferencedCardNames = 91;
 	AnnotationType_PlayerSelectingTargets = 92;
 	AnnotationType_PlayerSubmittedTargets = 93;
+	AnnotationType_CrewedThisTurn = 94;
 }
 
 enum Answer {
@@ -263,6 +264,7 @@ enum AttackWarningType {
 	AttackWarningType_MustAttackWithAtLeastOne = 1;
 	AttackWarningType_CannotAttackAlone = 2;
 	AttackWarningType_MustAttack = 3;
+	AttackWarningType_UnpayableEffectCost = 4;
 }
 
 message Attacker {
@@ -326,7 +328,6 @@ message AutoTapAction {
 	uint32 abilityGrpId = 2;
 	uint32 manaId = 3;
 	ManaPaymentOption manaPaymentOption = 4;
-	CostCategory costCategory = 5;
 }
 
 message AutoTapActionsAvailableReq {
@@ -589,7 +590,6 @@ enum ChoicePersistence {
 }
 
 message ChooseModalResp {
-	uint32 abilityGrpId = 1;
 	repeated uint32 grpIds = 2;
 }
 
@@ -653,7 +653,6 @@ enum ClientMessageType {
 	ClientMessageType_SelectFromGroupsResp = 48;
 	ClientMessageType_SearchFromGroupsResp = 49;
 	ClientMessageType_GatherResp = 50;
-	ClientMessageType_SubmitPaymentResp = 51;
 	ClientMessageType_AutoResp = 52;
 	ClientMessageType_UIMessage = 53;
 	ClientMessageType_SubmitDeckResp = 54;
@@ -705,7 +704,6 @@ message ClientToGREMessage {
 		SelectFromGroupsResp selectFromGroupsResp = 36;
 		SearchFromGroupsResp searchFromGroupsResp = 37;
 		GatherResp gatherResp = 38;
-		SubmitPaymentResp submitPaymentResp = 39;
 		UIMessage uiMessage = 40;
 		SubmitDeckResp submitDeckResp = 41;
 		ControlReq controlReq = 42;
@@ -765,13 +763,8 @@ message ConcedeReq {
 }
 
 message ConnectReq {
-	uint32 majorVer = 1;
-	uint32 minorVer = 2;
-	uint32 revisionVer = 3;
-	uint32 buildVer = 4;
 	SettingsMessage defaultSettings = 5;
 	ProtoVersion protoVer = 6;
-	uint32 seatId = 7;
 	Version grpVersion = 8;
 }
 
@@ -853,13 +846,6 @@ message Cost {
 		OrCost orCost = 11;
 		AndCost andCost = 12;
 	}
-}
-
-enum CostCategory {
-	CostCategory_None = 0;
-	CostCategory_Automatic = 1;
-	CostCategory_Confirmation = 2;
-	CostCategory_Manual = 3;
 }
 
 enum CostType {
@@ -1059,9 +1045,9 @@ enum CounterType {
 	CounterType_Stash = 167;
 	CounterType_Collection = 168;
 	CounterType_Rope = 169;
-	CounterType_PlaceHolderCounterType170 = 170;
-	CounterType_PlaceHolderCounterType171 = 171;
-	CounterType_PlaceHolderCounterType172 = 172;
+	CounterType_Ingenuity = 170;
+	CounterType_Phyresis = 171;
+	CounterType_Stun = 172;
 }
 
 message CreateMatchGameRoomRequest {
@@ -1144,6 +1130,7 @@ message DeclareAttackersReq {
 	repeated AttackWarning attackWarnings = 4;
 	repeated ManaRequirement manaCost = 5;
 	repeated Attacker qualifiedAttackers = 7;
+	bool canSubmitAttackers = 8;
 }
 
 message DeclareAttackersResp {
@@ -1173,7 +1160,6 @@ message Distribution {
 }
 
 message DistributionReq {
-	uint32 optionIndex = 1;
 	uint32 minAmount = 2;
 	uint32 maxAmount = 3;
 	uint32 minPerTarget = 4;
@@ -1185,7 +1171,6 @@ message DistributionReq {
 }
 
 message DistributionResp {
-	uint32 optionIndex = 1;
 	repeated Distribution distributions = 2;
 }
 
@@ -1224,7 +1209,6 @@ message EffectCost {
 }
 
 message EffectCostReq {
-	uint32 index = 1;
 	EffectCostType effectCostType = 3;
 	oneof message {
 		SelectNReq costSelection = 4;
@@ -1235,7 +1219,6 @@ message EffectCostReq {
 }
 
 message EffectCostResp {
-	uint32 index = 1;
 	EffectCostType effectCostType = 2;
 	oneof message {
 		SelectNResp costSelection = 3;
@@ -1355,10 +1338,6 @@ message GREConfiguration {
 
 message GRECreateRequest {
 	string matchID = 2;
-	uint32 majorVer = 4;
-	uint32 minorVer = 5;
-	uint32 revisionVer = 6;
-	uint32 buildVer = 7;
 }
 
 message GREDestroyRequest {
@@ -1700,14 +1679,12 @@ enum GameVariant {
 }
 
 message GatherReq {
-	uint32 optionIndex = 1;
 	uint32 destinationId = 2;
 	repeated GatherSource sources = 3;
 	uint32 amountToGather = 4;
 }
 
 message GatherResp {
-	uint32 optionIndex = 1;
 	repeated Gathering gatherings = 2;
 }
 
@@ -1769,7 +1746,6 @@ message GroupReq {
 	repeated uint32 instanceIds = 1;
 	repeated GroupSpecification groupSpecs = 2;
 	uint32 totalSelected = 3;
-	uint32 idx = 4;
 	GroupType groupType = 5;
 	GroupingContext context = 6;
 	uint32 sourceId = 7;
@@ -1777,7 +1753,6 @@ message GroupReq {
 
 message GroupResp {
 	repeated Group groups = 1;
-	uint32 idx = 2;
 	GroupType groupType = 3;
 }
 
@@ -1786,7 +1761,6 @@ message GroupSpecification {
 	uint32 upperBound = 2;
 	ZoneType zoneType = 3;
 	SubZoneType subZoneType = 4;
-	Prompt prompt = 5;
 	bool isFacedown = 6;
 }
 
@@ -1831,6 +1805,7 @@ enum IdType {
 	IdType_CardGrpId = 4;
 	IdType_AbilityGrpId = 5;
 	IdType_CardGrpIdIndex = 6;
+	IdType_ManaId = 7;
 }
 
 message IllegalRequestMessage {
@@ -1857,8 +1832,6 @@ message Int64Values {
 message IntermissionReq {
 	repeated UserOption options = 1;
 	Prompt intermissionPrompt = 2;
-	ResultType gameResultType = 3;
-	uint32 winningTeamId = 4;
 	ResultSpec result = 5;
 }
 
@@ -2298,7 +2271,6 @@ enum MulliganType {
 }
 
 message NumericInputReq {
-	uint32 optionIndex = 1;
 	uint32 minValue = 2;
 	uint32 maxValue = 3;
 	uint32 stepSize = 4;
@@ -2308,7 +2280,6 @@ message NumericInputReq {
 }
 
 message NumericInputResp {
-	uint32 optionIndex = 1;
 	uint32 numericInputValue = 2;
 }
 
@@ -2361,28 +2332,6 @@ enum OptionResponse {
 	OptionResponse_Cancel_No = 2;
 }
 
-enum OptionType {
-	OptionType_None = 0;
-	OptionType_Modal = 1;
-	OptionType_Splice = 2;
-	OptionType_AlternativeCost = 3;
-	OptionType_Numeric = 4;
-	OptionType_String = 5;
-	OptionType_ManaType = 6;
-	OptionType_Order = 7;
-	OptionType_Search = 8;
-	OptionType_Group = 9;
-	OptionType_Select = 10;
-	OptionType_SelectGroup = 11;
-	OptionType_Distribution = 12;
-	OptionType_OptionalAction = 13;
-	OptionType_ActionsAvailable = 14;
-	OptionType_SelectFromGroups = 15;
-	OptionType_SearchFromGroups = 16;
-	OptionType_Gathering = 17;
-	OptionType_SelectCounters = 18;
-}
-
 message OptionalActionMessage {
 	Prompt prompt = 1;
 	uint32 sourceId = 3;
@@ -2426,14 +2375,12 @@ message OrderDamageConfirmation {
 
 message OrderReq {
 	repeated uint32 ids = 1;
-	uint32 idx = 2;
 	OrderingContext orderingContext = 3;
 }
 
 message OrderResp {
 	repeated uint32 ids = 1;
 	OrderingType ordering = 2;
-	uint32 idx = 3;
 }
 
 message OrderedDamageAssignment {
@@ -2468,7 +2415,6 @@ message PayCostsReq {
 	ActionsAvailableReq paymentActions = 2;
 	SelectNReq paymentSelection = 3;
 	EffectCostReq effectCostReq = 4;
-	SubmitPaymentReq submitPaymentReq = 5;
 	AutoTapActionsAvailableReq autoTapActionsReq = 6;
 }
 
@@ -2694,7 +2640,6 @@ enum ResultType {
 }
 
 message SearchFromGroupsReq {
-	uint32 optionIndex = 1;
 	uint32 minFind = 2;
 	uint32 maxFind = 3;
 	repeated uint32 zonesToSearch = 4;
@@ -2705,13 +2650,10 @@ message SearchFromGroupsReq {
 }
 
 message SearchFromGroupsResp {
-	uint32 optionIndex = 1;
-	repeated uint32 itemsFound = 2;
 	repeated Group groups = 3;
 }
 
 message SearchReq {
-	uint32 optionIndex = 1;
 	uint32 minFind = 2;
 	uint32 maxFind = 3;
 	repeated uint32 zonesToSearch = 4;
@@ -2723,7 +2665,6 @@ message SearchReq {
 }
 
 message SearchResp {
-	uint32 optionIndex = 1;
 	repeated uint32 itemsFound = 2;
 	uint32 addZoneToSearchScope = 3;
 }
@@ -2738,25 +2679,18 @@ message SelectCountersReq {
 	uint32 minSel = 1;
 	uint32 maxSel = 2;
 	SelectionContext context = 3;
-	OptionType optionType = 4;
 	OptionContext optionContext = 5;
 	SelectionListType listType = 6;
 	repeated CounterPair counterPairs = 7;
-	uint32 idx = 8;
 	uint32 sourceId = 9;
 }
 
 message SelectCountersResp {
-	uint32 idx = 1;
-	SelectionContext context = 2;
-	OptionContext optionContext = 3;
-	OptionType optionType = 4;
 	repeated CounterPair selections = 5;
 }
 
 message SelectFromGroupsReq {
 	repeated Group groups = 3;
-	uint32 idx = 4;
 	uint32 minTotalSel = 5;
 	uint32 maxTotalSel = 6;
 	GroupingStyle groupingStyle = 7;
@@ -2766,19 +2700,15 @@ message SelectFromGroupsReq {
 }
 
 message SelectFromGroupsResp {
-	uint32 idx = 1;
-	repeated uint32 ids = 2;
 	repeated Group groups = 3;
 }
 
 message SelectManaTypeReq {
-	uint32 index = 1;
 	repeated ManaColor manaColors = 2;
 	uint32 sourceId = 3;
 }
 
 message SelectManaTypeResp {
-	uint32 index = 1;
 	ManaColor manaColor = 3;
 }
 
@@ -2786,12 +2716,10 @@ message SelectNGroupReq {
 	uint32 minSel = 1;
 	uint32 maxSel = 2;
 	repeated Group groups = 3;
-	uint32 idx = 4;
 	uint32 sourceId = 5;
 }
 
 message SelectNGroupResp {
-	uint32 idx = 1;
 	repeated uint32 selectedgroupids = 2;
 }
 
@@ -2799,13 +2727,11 @@ message SelectNReq {
 	int32 minSel = 1;
 	uint32 maxSel = 2;
 	SelectionContext context = 3;
-	OptionType optionType = 4;
 	OptionContext optionContext = 5;
 	SelectionListType listType = 6;
 	repeated uint32 ids = 7;
 	repeated int32 weights = 8;
 	StaticList staticList = 9;
-	uint32 idx = 10;
 	Prompt prompt = 11;
 	IdType idType = 12;
 	bool choicesAreRepeatable = 13;
@@ -2817,10 +2743,6 @@ message SelectNReq {
 }
 
 message SelectNResp {
-	uint32 idx = 1;
-	SelectionContext context = 2;
-	OptionContext optionContext = 3;
-	OptionType optionType = 4;
 	repeated uint32 ids = 5;
 	OrderingType useArbitrary = 6;
 }
@@ -2842,7 +2764,6 @@ message SelectTargetsReq {
 
 message SelectTargetsResp {
 	TargetSelection target = 1;
-	SelectAction action = 2;
 }
 
 enum SelectionContext {
@@ -3071,7 +2992,6 @@ enum StopType {
 }
 
 message StringInputReq {
-	uint32 optionIndex = 1;
 	uint32 sourceId = 2;
 }
 
@@ -3497,7 +3417,7 @@ enum SubType {
 	SubType_Minsc = 408;
 	SubType_Tasha = 409;
 	SubType_Walrus = 410;
-	SubType_PlaceholderSubType411 = 411;
+	SubType_Powerstone = 411;
 	SubType_PlaceholderSubType412 = 412;
 }
 
@@ -3521,12 +3441,6 @@ message SubmitDeckReq {
 
 message SubmitDeckResp {
 	DeckMessage deck = 1;
-}
-
-message SubmitPaymentReq {
-}
-
-message SubmitPaymentResp {
 }
 
 message SubmitTargetsResp {
