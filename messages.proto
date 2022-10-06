@@ -201,6 +201,8 @@ enum AnnotationType {
 	AnnotationType_PlayerSelectingTargets = 92;
 	AnnotationType_PlayerSubmittedTargets = 93;
 	AnnotationType_CrewedThisTurn = 94;
+	AnnotationType_PhasedOut = 95;
+	AnnotationType_PhasedIn = 96;
 }
 
 enum Answer {
@@ -1048,6 +1050,7 @@ enum CounterType {
 	CounterType_Ingenuity = 170;
 	CounterType_Phyresis = 171;
 	CounterType_Stun = 172;
+	CounterType_PHCT173 = 173;
 }
 
 message CreateMatchGameRoomRequest {
@@ -3419,6 +3422,8 @@ enum SubType {
 	SubType_Walrus = 410;
 	SubType_Powerstone = 411;
 	SubType_PlaceholderSubType412 = 412;
+	SubType_PlaceholderSubType413 = 413;
+	SubType_PlaceholderSubType414 = 414;
 }
 
 enum SubZoneType {
