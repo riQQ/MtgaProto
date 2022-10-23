@@ -25,12 +25,12 @@ jobs:
         with:
           repository: riQQ/MsiExtractor
           ref: refs/heads/master
-          path: MsiExtractor
+          path: ../MsiExtractor
           fetch-depth: 1
       - run: |
           echo $Env:GITHUB_WORKSPACE
           cd "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\"
-          .\MSBuild.exe $Env:GITHUB_WORKSPACE\MsiExtractor\MsiExtractor.sln
+          .\MSBuild.exe $Env:GITHUB_WORKSPACE\..\MsiExtractor\MsiExtractor.sln
       - id: download_msi
         run: |
           $msiUrl = ${{ steps.get_version.outputs.msiUrl }}
@@ -43,7 +43,7 @@ jobs:
           echo "::set-output name=msiFilePath::$msiFilePath"
       - name: Run MsiExtractor
         run: |
-          cd "$Env:GITHUB_WORKSPACE\MsiExtractor\MsiExtractor\bin\Debug"
+          cd "$Env:GITHUB_WORKSPACE\..\MsiExtractor\MsiExtractor\bin\Debug"
           .\MsiExtractor.exe ${{ steps.download_msi.outputs.msiFilePath }} "Wizards.MDN.GreProtobuf.Unity.dll"
           $outputDirectory = Split-Path -Parent ${{ steps.download_msi.outputs.msiFilePath }}
           dir "$outputDirectory"
@@ -52,7 +52,7 @@ jobs:
         with:
           repository: riQQ/proto-extractor
           ref: refs/heads/mtgatool-formatting
-          path: proto-extractor
+          path: ../proto-extractor
           fetch-depth: 1
       - uses: actions/setup-dotnet@v3
         with:
