@@ -12,7 +12,7 @@ jobs:
     name: Get latest MTGA version
     runs-on: windows-2019
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 1
       - run: npm install
@@ -21,7 +21,7 @@ jobs:
         uses: ./.github/actions/check-version-action
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v3
         with:
           repository: riQQ/MsiExtractor
           ref: refs/heads/master
@@ -48,13 +48,13 @@ jobs:
           $outputDirectory = Split-Path -Parent ${{ steps.download_msi.outputs.msiFilePath }}
           dir "$outputDirectory"
       - name: Checkout proto extractor
-        uses: actions/checkout@v1
+        uses: actions/checkout@v3
         with:
           repository: riQQ/proto-extractor
           ref: refs/heads/mtgatool-formatting
           path: proto-extractor
           fetch-depth: 1
-      - uses: actions/setup-dotnet@v1
+      - uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '2.1.805' # SDK Version to use
       - name: Build proto extractor
