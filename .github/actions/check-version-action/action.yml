@@ -2,7 +2,7 @@ name: "check latest MTGA version"
 description: "Checks for the latest MTGA version"
 author: "riQQ"
 runs:
-  using: "node12"
+  using: "node16"
   main: "./check-version.js"
 outputs:
   msiUrl:
