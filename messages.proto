@@ -66,7 +66,7 @@ enum ActionType {
 	ActionType_CastMDFC = 18;
 	ActionType_PlayMDFC = 19;
 	ActionType_Special_Payment = 20;
-	ActionType_Placeholder21 = 21;
+	ActionType_CastPrototype = 21;
 	ActionType_Placeholder22 = 22;
 	ActionType_Placeholder23 = 23;
 	ActionType_Placeholder24 = 24;
@@ -203,6 +203,8 @@ enum AnnotationType {
 	AnnotationType_CrewedThisTurn = 94;
 	AnnotationType_PhasedOut = 95;
 	AnnotationType_PhasedIn = 96;
+	AnnotationType_LoyaltyActivationsRemaining = 97;
+	AnnotationType_GroupedIds = 98;
 }
 
 enum Answer {
@@ -336,10 +338,16 @@ message AutoTapActionsAvailableReq {
 	repeated AutoTapSolution autoTapSolutions = 2;
 }
 
+message AutoTapManaPayment {
+	ManaColor manaColor = 1;
+	uint32 manaSpecTypeBits = 2;
+}
+
 message AutoTapSolution {
 	repeated AutoTapAction autoTapActions = 1;
 	repeated ManaPaymentCondition manaPaymentConditions = 2;
 	repeated ManaColor selectedManaColors = 3;
+	repeated AutoTapManaPayment manaPayments = 4;
 }
 
 enum AutoTapStopsSetting {
@@ -493,7 +501,7 @@ enum CardMechanicType {
 	CardMechanicType_Mutate = 49;
 	CardMechanicType_GraveyardExile = 50;
 	CardMechanicType_Exert = 51;
-	CardMechanicType_Placeholder52 = 52;
+	CardMechanicType_PutTopOrBottom = 52;
 	CardMechanicType_Placeholder53 = 53;
 	CardMechanicType_Placeholder54 = 54;
 	CardMechanicType_Placeholder55 = 55;
@@ -875,6 +883,7 @@ message Counter {
 message CounterPair {
 	uint32 instanceId = 1;
 	CounterType counterType = 2;
+	uint32 count = 3;
 }
 
 enum CounterType {
@@ -1051,6 +1060,13 @@ enum CounterType {
 	CounterType_Phyresis = 171;
 	CounterType_Stun = 172;
 	CounterType_PHCT173 = 173;
+	CounterType_PHCT174 = 174;
+	CounterType_Experience = 175;
+	CounterType_Slumber = 176;
+	CounterType_PHCT177 = 177;
+	CounterType_PHCT178 = 178;
+	CounterType_PHCT179 = 179;
+	CounterType_PHCT180 = 180;
 }
 
 message CreateMatchGameRoomRequest {
@@ -1597,7 +1613,7 @@ enum GameObjectType {
 	GameObjectType_MDFCBack = 11;
 	GameObjectType_DisturbBack = 12;
 	GameObjectType_Boon = 13;
-	GameObjectType_Placeholder14 = 14;
+	GameObjectType_PrototypeFacet = 14;
 	GameObjectType_Placeholder15 = 15;
 	GameObjectType_Placeholder16 = 16;
 }
@@ -1943,6 +1959,7 @@ enum ManaPaymentConditionType {
 	ManaPaymentConditionType_Threshold = 1;
 	ManaPaymentConditionType_Maximum = 2;
 	ManaPaymentConditionType_Diversity = 3;
+	ManaPaymentConditionType_Uniformity = 4;
 }
 
 message ManaPaymentOption {
@@ -2133,6 +2150,7 @@ message MatchGameRoomPlayerInfo {
 	bool isWotc = 14;
 	string platformId = 15;
 	bool isBotPlayer = 16;
+	string eventId = 17;
 	int64 joinTimestamp = 20;
 	int64 inactivityTimeoutTimestamp = 21;
 	int64 disconnectTimeoutTimestamp = 22;
@@ -3421,9 +3439,11 @@ enum SubType {
 	SubType_Tasha = 409;
 	SubType_Walrus = 410;
 	SubType_Powerstone = 411;
-	SubType_PlaceholderSubType412 = 412;
+	SubType_Urza = 412;
 	SubType_PlaceholderSubType413 = 413;
 	SubType_PlaceholderSubType414 = 414;
+	SubType_PlaceholderSubType415 = 415;
+	SubType_PlaceholderSubType416 = 416;
 }
 
 enum SubZoneType {
