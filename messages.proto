@@ -269,6 +269,7 @@ enum AttackWarningType {
 	AttackWarningType_CannotAttackAlone = 2;
 	AttackWarningType_MustAttack = 3;
 	AttackWarningType_UnpayableEffectCost = 4;
+	AttackWarningType_CannotBeAttackedByMoreThanOne = 5;
 }
 
 message Attacker {
@@ -276,7 +277,6 @@ message Attacker {
 	repeated DamageRecipient legalDamageRecipients = 2;
 	DamageRecipient selectedDamageRecipient = 3;
 	uint32 alternativeGrpId = 4;
-	bool autoAttacked = 5;
 	bool mustAttack = 6;
 }
 
@@ -1316,6 +1316,7 @@ enum FailureReason {
 	FailureReason_DisallowedValue = 56;
 	FailureReason_InvalidTypeKind = 57;
 	FailureReason_InvalidWishCard = 58;
+	FailureReason_InvalidController = 59;
 }
 
 message FinalMatchResult {
@@ -2298,6 +2299,7 @@ message NumericInputReq {
 	uint32 sourceId = 5;
 	NumericInputType numericInputType = 6;
 	repeated uint32 disallowedValues = 7;
+	repeated uint32 suggestedValues = 8;
 }
 
 message NumericInputResp {
@@ -2910,7 +2912,6 @@ message SettingsMessage {
 	repeated Stop transientStops = 15;
 	repeated CosmeticInfo cosmetics = 16;
 	Setting autoSelectReplacementSetting = 17;
-	Setting autoDeclareAttackersThatMustAttackSetting = 18;
 	AutoPassOption stackAutoPassOption = 19;
 }
 
@@ -3506,6 +3507,7 @@ message TargetSelection {
 	uint32 selectedTargets = 5;
 	Prompt prompt = 6;
 	uint32 targetSourceZoneId = 7;
+	uint32 targetingAbilityGrpId = 8;
 }
 
 enum TargetType {
