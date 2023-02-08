@@ -205,6 +205,8 @@ enum AnnotationType {
 	AnnotationType_PhasedIn = 96;
 	AnnotationType_LoyaltyActivationsRemaining = 97;
 	AnnotationType_GroupedIds = 98;
+	AnnotationType_RegeneratePending = 99;
+	AnnotationType_PermanentRegenerated = 100;
 }
 
 enum Answer {
@@ -528,6 +530,7 @@ enum CardType {
 	CardType_Tribal = 11;
 	CardType_Vanguard = 12;
 	CardType_Dungeon = 13;
+	CardType_Battle = 14;
 }
 
 message CastingTimeOptionReq {
@@ -796,12 +799,6 @@ enum ConnectionState {
 	ConnectionState_Closing = 4;
 }
 
-enum ConnectionStateChangedEventType {
-	ConnectionStateChangedEventType_Invalid = 0;
-	ConnectionStateChangedEventType_Connected = 1;
-	ConnectionStateChangedEventType_Disconnected = 2;
-}
-
 enum ConnectionStatus {
 	ConnectionStatus_None = 0;
 	ConnectionStatus_Success = 1;
@@ -1059,7 +1056,7 @@ enum CounterType {
 	CounterType_Ingenuity = 170;
 	CounterType_Phyresis = 171;
 	CounterType_Stun = 172;
-	CounterType_PHCT173 = 173;
+	CounterType_Oil = 173;
 	CounterType_PHCT174 = 174;
 	CounterType_Experience = 175;
 	CounterType_Slumber = 176;
@@ -1071,10 +1068,6 @@ enum CounterType {
 
 message CreateMatchGameRoomRequest {
 	MatchGameRoomConfig gameRoomConfig = 1;
-}
-
-message CreateMatchGameRoomResponse {
-	MatchGameRoomInfo gameRoomInfo = 1;
 }
 
 message CreateMatchGameRoomResponseV2 {
@@ -1199,14 +1192,6 @@ message DoubleValue {
 
 message DoubleValues {
 	repeated double values = 1;
-}
-
-message DraftGameRoomConfig {
-	string gameRoomId = 1;
-	string eventId = 2;
-}
-
-message DraftGameRoomInfo {
 }
 
 message EchoRequest {
@@ -1597,6 +1582,7 @@ message GameObjectInfo {
 	repeated uint32 abilityOriginalCardGrpIds = 36;
 	string baseSkinCode = 37;
 	repeated SubType removedSubtypes = 38;
+	UInt32Value defense = 39;
 }
 
 enum GameObjectType {
@@ -1617,12 +1603,6 @@ enum GameObjectType {
 	GameObjectType_PrototypeFacet = 14;
 	GameObjectType_Placeholder15 = 15;
 	GameObjectType_Placeholder16 = 16;
-}
-
-enum GameRoomType {
-	GameRoomType_Invalid = 0;
-	GameRoomType_Match = 1;
-	GameRoomType_Draft = 2;
 }
 
 enum GameStage {
@@ -1719,31 +1699,6 @@ message Gathering {
 	uint32 amount = 2;
 }
 
-message GetGameRoomIdsRequest {
-	string eventId = 1;
-	GameRoomType gameRoomType = 2;
-	repeated MatchGameRoomStateType gameRoomStateTypeFilter = 5;
-	bool includeInvisibleRooms = 7;
-	bool includeReservedRooms = 8;
-	SortFilterPagingOptions sortFilterPagingOptions = 10;
-}
-
-message GetGameRoomIdsResponse {
-	repeated string gameRoomIds = 1;
-	ContinuationToken continuationToken = 10;
-}
-
-message GetGameRoomInfoRequest {
-	string gameRoomId = 1;
-}
-
-message GetGameRoomInfoResponse {
-	oneof message {
-		MatchGameRoomInfo matchRoomInfo = 1;
-		DraftGameRoomInfo draftRoomInfo = 2;
-	}
-}
-
 message GetSettingsResp {
 	SettingsMessage settings = 1;
 }
@@ -1811,6 +1766,7 @@ enum HighlightType {
 	HighlightType_Hot = 3;
 	HighlightType_Counterspell = 4;
 	HighlightType_Random = 5;
+	HighlightType_PlaceholderHighlight6 = 6;
 }
 
 message IRLoaderConfiguration {
@@ -1853,19 +1809,6 @@ message IntermissionReq {
 	repeated UserOption options = 1;
 	Prompt intermissionPrompt = 2;
 	ResultSpec result = 5;
-}
-
-message JoinMatchGameRoomRequest {
-	string gameRoomId = 1;
-	string gameRoomPassword = 2;
-}
-
-message JoinMatchGameRoomResponse {
-	MatchGameRoomInfo gameRoomInfo = 1;
-}
-
-message JoinMatchGameRoomResponseV2 {
-	int32 seatId = 1;
 }
 
 message KeyValuePair {
@@ -2036,106 +1979,24 @@ message MatchConfig {
 	DeckConstraintInfo deckConstraintInfo = 16;
 }
 
-message MatchControllerClientSessionSettings {
-	repeated MatchControllerEventType subscribedEventTypes = 10;
-}
-
-enum MatchControllerEventType {
-	MatchControllerEventType_Invalid = 0;
-	MatchControllerEventType_MatchGameRoomStateChanged = 1;
-	MatchControllerEventType_MatchControllerStateChanged = 2;
-	MatchControllerEventType_MatchControllerHealthReport = 3;
-}
-
-message MatchControllerGetSettingsRequest {
-	repeated string propertyNames = 1;
-}
-
-message MatchControllerGetSettingsResponse {
-	MatchControllerSettings matchControllerSettings = 1;
-	MatchControllerClientSessionSettings clientSessionSettings = 2;
-}
-
-message MatchControllerHealthReport {
-	MatchControllerServiceInfo serviceInfo = 1;
-	int64 timestamp = 2;
-}
-
-message MatchControllerServiceInfo {
-	ServiceFabricServiceInfo serviceFabricServiceInfo = 1;
-	string environmentId = 2;
-	MatchControllerState matchControllerState = 3;
-}
-
-message MatchControllerSetSettingsRequest {
-	MatchControllerSettings settings = 1;
-	MatchControllerClientSessionSettings clientSessionSettings = 2;
-}
-
-message MatchControllerSetSettingsResponse {
-	MatchControllerSettings settings = 1;
-	MatchControllerClientSessionSettings clientSessionSettings = 2;
-}
-
-message MatchControllerSettings {
-	string greIrBin = 5;
-	string grpdXml = 6;
-	string currentSeason = 20;
-}
-
-enum MatchControllerState {
-	MatchControllerState_Invalid = 0;
-	MatchControllerState_Opening = 1;
-	MatchControllerState_Running = 2;
-	MatchControllerState_Recovering = 3;
-	MatchControllerState_Draining = 4;
-	MatchControllerState_Closing = 20;
-	MatchControllerState_Closed = 21;
-}
-
-message MatchControllerStateChangedEvent {
-	MatchControllerServiceInfo serviceInfo = 1;
-	int64 timestamp = 2;
-}
-
 message MatchGameRoomConfig {
-	string gameRoomId = 1;
 	string eventId = 2;
 	repeated MatchGameRoomPlayerInfo reservedPlayers = 8;
 	string matchId = 11;
 	MatchConfig matchConfig = 12;
 	GREConfiguration greConfig = 13;
 	bool isVisible = 20;
-	string password = 21;
-	string greIrBinPath = 30;
 	string greHostLoggerLevel = 31;
-	string greRecorderConfig = 32;
 	int32 joinRoomTimeoutSecs = 35;
 	int32 playerDisconnectTimeoutSecs = 36;
 }
 
 message MatchGameRoomInfo {
-	string gameRoomId = 1;
 	MatchGameRoomConfig gameRoomConfig = 2;
 	MatchGameRoomStateType stateType = 3;
 	FinalMatchResult finalMatchResult = 4;
-	repeated ResultSpec interimMatchResultList = 5;
 	repeated MatchGameRoomPlayerInfo players = 6;
 	repeated MatchPlayerMetrics playerMetrics = 7;
-	string matchControllerUri = 8;
-	string matchClusterUri = 9;
-	int64 createdTimestamp = 10;
-	int64 updatedTimestamp = 11;
-	int64 matchResultSavedTimestamp = 12;
-	ClientType creatorClientType = 20;
-	string creatorId = 21;
-}
-
-message MatchGameRoomOpponentConnectionStateChangedEvent {
-	string matchId = 1;
-	int32 systemSeatId = 2;
-	ConnectionStateChangedEventType eventType = 3;
-	int64 timestamp = 10;
 }
 
 message MatchGameRoomPlayerInfo {
@@ -2146,20 +2007,15 @@ message MatchGameRoomPlayerInfo {
 	UserConnectionInfo connectionInfo = 5;
 	string courseId = 10;
 	string deckId = 11;
-	string clientAuthToken = 12;
 	string sessionId = 13;
 	bool isWotc = 14;
 	string platformId = 15;
 	bool isBotPlayer = 16;
 	string eventId = 17;
-	int64 joinTimestamp = 20;
-	int64 inactivityTimeoutTimestamp = 21;
-	int64 disconnectTimeoutTimestamp = 22;
 }
 
 message MatchGameRoomStateChangedEvent {
 	MatchGameRoomInfo gameRoomInfo = 1;
-	int64 timestamp = 2;
 }
 
 enum MatchGameRoomStateType {
@@ -2177,11 +2033,6 @@ enum MatchGameRoomStateType {
 message MatchPlayerMetrics {
 	string userId = 1;
 	repeated PlayerMetricKeyValuePair metrics = 2;
-}
-
-message MatchResultSaved {
-	string matchId = 1;
-	int64 timestamp = 10;
 }
 
 enum MatchScope {
@@ -2224,19 +2075,8 @@ message MatchServiceToClientMessage {
 		MatchServiceError error = 7;
 		GreToClientEvent greToClientEvent = 8;
 		MatchGameRoomStateChangedEvent matchGameRoomStateChangedEvent = 9;
-		MatchControllerStateChangedEvent matchControllerStateChangedEvent = 10;
-		MatchControllerHealthReport matchControllerHealthReport = 11;
-		MatchGameRoomOpponentConnectionStateChangedEvent opponentConnectionStateChangedEvent = 12;
 		AuthenticateResponse authenticateResponse = 100;
-		MatchControllerServiceInfo serviceInfoResponse = 101;
-		MatchControllerGetSettingsResponse getSettingsResponse = 110;
-		MatchControllerSetSettingsResponse setSettingsResponse = 111;
-		CreateMatchGameRoomResponse createMatchGameRoomResponse = 200;
 		CreateMatchGameRoomResponseV2 createMatchGameRoomResponseV2 = 201;
-		JoinMatchGameRoomResponse joinMatchGameRoomResponse = 210;
-		JoinMatchGameRoomResponseV2 joinMatchGameRoomResponseV2 = 211;
-		GetGameRoomIdsResponse getGameRoomIdsResponse = 240;
-		GetGameRoomInfoResponse getGameRoomInfoResponse = 241;
 		EchoResponse echoResponse = 1000;
 	}
 }
@@ -3441,8 +3281,8 @@ enum SubType {
 	SubType_Walrus = 410;
 	SubType_Powerstone = 411;
 	SubType_Urza = 412;
-	SubType_PlaceholderSubType413 = 413;
-	SubType_PlaceholderSubType414 = 414;
+	SubType_Mite = 413;
+	SubType_Sphere = 414;
 	SubType_PlaceholderSubType415 = 415;
 	SubType_PlaceholderSubType416 = 416;
 }
