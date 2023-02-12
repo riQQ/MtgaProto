@@ -1,4 +1,4 @@
-import got from 'got';
+let { got } = await import('got')
 const core = require('@actions/core');
 // const github = require('@actions/github');
 
