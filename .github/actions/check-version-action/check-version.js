@@ -1,4 +1,4 @@
-const got = require('got');
+import got from 'got';
 const core = require('@actions/core');
 // const github = require('@actions/github');
 
