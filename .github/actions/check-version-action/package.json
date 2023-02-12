@@ -10,6 +10,6 @@
   "description": "",
   "dependencies": {
     "@actions/core": "^1.2.0",
-    "got": "^11.8.5"
+    "got": "^12.5.3"
   }
 }
