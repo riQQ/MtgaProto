@@ -37,6 +37,7 @@ message Action {
 	uint32 timingSourceGrpid = 30;
 	uint32 uniqueAbilityId = 31;
 	repeated uint32 consumableCostAdjustmentQualificationIds = 32;
+	bool isManaAbilityWithSideEffect = 33;
 }
 
 message ActionInfo {
@@ -1302,6 +1303,7 @@ enum FailureReason {
 	FailureReason_InvalidTypeKind = 57;
 	FailureReason_InvalidWishCard = 58;
 	FailureReason_InvalidController = 59;
+	FailureReason_InvalidCardColor = 60;
 }
 
 message FinalMatchResult {
