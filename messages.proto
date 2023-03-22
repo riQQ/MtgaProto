@@ -208,6 +208,7 @@ enum AnnotationType {
 	AnnotationType_GroupedIds = 98;
 	AnnotationType_RegeneratePending = 99;
 	AnnotationType_PermanentRegenerated = 100;
+	AnnotationType_ObjectsToDistinguish = 101;
 }
 
 enum Answer {
