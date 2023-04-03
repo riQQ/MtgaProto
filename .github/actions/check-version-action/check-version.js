@@ -1,5 +1,5 @@
-let { got } = await import('got')
-const core = require('@actions/core');
+const got = import('got')
+const core = import('@actions/core');
 // const github = require('@actions/github');
 
 (async () => {
