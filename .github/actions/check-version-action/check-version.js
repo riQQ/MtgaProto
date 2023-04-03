@@ -1,5 +1,5 @@
-const got = require('got');
-const core = require('@actions/core');
+import got from 'got';
+import * as core from '@actions/core';
 // const github = require('@actions/github');
 
 (async () => {
