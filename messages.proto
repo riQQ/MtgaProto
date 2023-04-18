@@ -32,7 +32,7 @@ message Action {
 	uint32 maxActivations = 24;
 	bool isBatchable = 25;
 	ManaRequirement twobridGenericManaCost = 26;
-	uint32 highlight = 27;
+	HighlightType highlight = 27;
 	repeated Cost costs = 28;
 	uint32 timingSourceGrpid = 30;
 	uint32 uniqueAbilityId = 31;
@@ -1059,13 +1059,18 @@ enum CounterType {
 	CounterType_Phyresis = 171;
 	CounterType_Stun = 172;
 	CounterType_Oil = 173;
-	CounterType_PHCT174 = 174;
+	CounterType_Defense = 174;
 	CounterType_Experience = 175;
 	CounterType_Slumber = 176;
 	CounterType_PHCT177 = 177;
 	CounterType_PHCT178 = 178;
 	CounterType_PHCT179 = 179;
 	CounterType_PHCT180 = 180;
+	CounterType_PHCT181 = 181;
+	CounterType_PHCT182 = 182;
+	CounterType_PHCT183 = 183;
+	CounterType_PHCT184 = 184;
+	CounterType_PHCT185 = 185;
 }
 
 message CreateMatchGameRoomRequest {
@@ -1769,7 +1774,7 @@ enum HighlightType {
 	HighlightType_Hot = 3;
 	HighlightType_Counterspell = 4;
 	HighlightType_Random = 5;
-	HighlightType_PlaceholderHighlight6 = 6;
+	HighlightType_CopySpell = 6;
 }
 
 message IRLoaderConfiguration {
@@ -3286,8 +3291,15 @@ enum SubType {
 	SubType_Urza = 412;
 	SubType_Mite = 413;
 	SubType_Sphere = 414;
-	SubType_PlaceholderSubType415 = 415;
-	SubType_PlaceholderSubType416 = 416;
+	SubType_Incubator = 415;
+	SubType_Siege = 416;
+	SubType_PlaceholderSubType417 = 417;
+	SubType_PlaceholderSubType418 = 418;
+	SubType_PlaceholderSubType419 = 419;
+	SubType_PlaceholderSubType420 = 420;
+	SubType_PlaceholderSubType421 = 421;
+	SubType_PlaceholderSubType422 = 422;
+	SubType_PlaceholderSubType423 = 423;
 }
 
 enum SubZoneType {
@@ -3334,7 +3346,7 @@ enum SuperType {
 message Target {
 	uint32 targetInstanceId = 1;
 	SelectAction legalAction = 2;
-	uint32 highlight = 3;
+	HighlightType highlight = 3;
 }
 
 message TargetInfo {
