@@ -452,6 +452,7 @@ message CardConfig {
 	string title = 2;
 	string expansionCode = 3;
 	string rarity = 4;
+	string cardPoolFilePath = 5;
 }
 
 enum CardMechanicType {
@@ -1062,7 +1063,7 @@ enum CounterType {
 	CounterType_Defense = 174;
 	CounterType_Experience = 175;
 	CounterType_Slumber = 176;
-	CounterType_PHCT177 = 177;
+	CounterType_Rejection = 177;
 	CounterType_PHCT178 = 178;
 	CounterType_PHCT179 = 179;
 	CounterType_PHCT180 = 180;
