@@ -584,6 +584,7 @@ enum CastingTimeOptionType {
 	CastingTimeOptionType_TimingPermission = 14;
 	CastingTimeOptionType_Casualty = 15;
 	CastingTimeOptionType_Specialize = 16;
+	CastingTimeOptionType_Placeholder17 = 17;
 }
 
 message CastingTimeOptionsReq {
@@ -1064,9 +1065,9 @@ enum CounterType {
 	CounterType_Experience = 175;
 	CounterType_Slumber = 176;
 	CounterType_Rejection = 177;
-	CounterType_PHCT178 = 178;
-	CounterType_PHCT179 = 179;
-	CounterType_PHCT180 = 180;
+	CounterType_Burden = 178;
+	CounterType_Hope = 179;
+	CounterType_Influence = 180;
 	CounterType_PHCT181 = 181;
 	CounterType_PHCT182 = 182;
 	CounterType_PHCT183 = 183;
@@ -1592,6 +1593,7 @@ message GameObjectInfo {
 	string baseSkinCode = 37;
 	repeated SubType removedSubtypes = 38;
 	UInt32Value defense = 39;
+	uint32 othersideGrpId = 40;
 }
 
 enum GameObjectType {
@@ -1776,6 +1778,7 @@ enum HighlightType {
 	HighlightType_Counterspell = 4;
 	HighlightType_Random = 5;
 	HighlightType_CopySpell = 6;
+	HighlightType_Placeholder7 = 7;
 }
 
 message IRLoaderConfiguration {
