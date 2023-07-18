@@ -1958,6 +1958,7 @@ enum ManaSpecType {
 	ManaSpecType_DoesNotEmpty = 7;
 	ManaSpecType_AdditionalEffect = 8;
 	ManaSpecType_FromTreasure = 9;
+	ManaSpecType_Placeholder10 = 10;
 }
 
 enum MatchCompletedReasonType {
@@ -2119,6 +2120,7 @@ message ModalReq {
 	uint32 maxSel = 4;
 	bool repeatedSelectAllowed = 5;
 	repeated ModalOption excludedOptions = 6;
+	repeated uint32 otherSel = 7;
 }
 
 enum MulliganOption {
