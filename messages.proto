@@ -584,7 +584,7 @@ enum CastingTimeOptionType {
 	CastingTimeOptionType_TimingPermission = 14;
 	CastingTimeOptionType_Casualty = 15;
 	CastingTimeOptionType_Specialize = 16;
-	CastingTimeOptionType_Placeholder17 = 17;
+	CastingTimeOptionType_Bargain = 17;
 }
 
 message CastingTimeOptionsReq {
@@ -677,6 +677,7 @@ enum ClientMessageType {
 	ClientMessageType_PerformAutoTapActionsResp = 56;
 	ClientMessageType_StringInputResp = 57;
 	ClientMessageType_SelectCountersResp = 58;
+	ClientMessageType_PredictionReq = 59;
 }
 
 message ClientSessionInfo {
@@ -727,6 +728,7 @@ message ClientToGREMessage {
 		PerformAutoTapActionsResp performAutoTapActionsResp = 43;
 		StringInputResp stringInputResp = 44;
 		SelectCountersResp selectCountersResp = 45;
+		PredictionReq predictionReq = 46;
 	}
 	uint32 timerId = 100;
 }
@@ -1068,11 +1070,15 @@ enum CounterType {
 	CounterType_Burden = 178;
 	CounterType_Hope = 179;
 	CounterType_Influence = 180;
-	CounterType_PHCT181 = 181;
+	CounterType_Skewer = 181;
 	CounterType_PHCT182 = 182;
 	CounterType_PHCT183 = 183;
 	CounterType_PHCT184 = 184;
 	CounterType_PHCT185 = 185;
+	CounterType_PHCT186 = 186;
+	CounterType_PHCT187 = 187;
+	CounterType_PHCT188 = 188;
+	CounterType_PHCT189 = 189;
 }
 
 message CreateMatchGameRoomRequest {
@@ -1424,6 +1430,7 @@ enum GREMessageType {
 	GREMessageType_SubmitDeckConfirmation = 57;
 	GREMessageType_StringInputReq = 58;
 	GREMessageType_SelectCountersReq = 59;
+	GREMessageType_PredictionResp = 60;
 }
 
 message GREResumeMatchRequest {
@@ -1516,6 +1523,7 @@ message GREToClientMessage {
 		TimerStateMessage timerStateMessage = 55;
 		StringInputReq stringInputReq = 57;
 		SelectCountersReq selectCountersReq = 58;
+		PredictionResp predictionResp = 59;
 	}
 	Prompt prompt = 6;
 	bool informationalUseOnly = 45;
@@ -1778,7 +1786,7 @@ enum HighlightType {
 	HighlightType_Counterspell = 4;
 	HighlightType_Random = 5;
 	HighlightType_CopySpell = 6;
-	HighlightType_Placeholder7 = 7;
+	HighlightType_ReplaceRole = 7;
 }
 
 message IRLoaderConfiguration {
@@ -2360,6 +2368,13 @@ message PlayerMetricKeyValuePair {
 message PlayerMetrics {
 	uint32 playerId = 1;
 	repeated KeyValuePairInfo metrics = 2;
+}
+
+message PredictionReq {
+}
+
+message PredictionResp {
+	repeated GameStateMessage gameStateMessages = 1;
 }
 
 message Prompt {
@@ -3299,13 +3314,16 @@ enum SubType {
 	SubType_Sphere = 414;
 	SubType_Incubator = 415;
 	SubType_Siege = 416;
-	SubType_PlaceholderSubType417 = 417;
+	SubType_Role = 417;
 	SubType_PlaceholderSubType418 = 418;
 	SubType_PlaceholderSubType419 = 419;
 	SubType_PlaceholderSubType420 = 420;
 	SubType_PlaceholderSubType421 = 421;
 	SubType_PlaceholderSubType422 = 422;
 	SubType_PlaceholderSubType423 = 423;
+	SubType_PlaceholderSubType424 = 424;
+	SubType_PlaceholderSubType425 = 425;
+	SubType_PlaceholderSubType426 = 426;
 }
 
 enum SubZoneType {
@@ -3421,6 +3439,7 @@ message TestConfig {
 	bool disableHiFiSettings = 27;
 	bool enableSideboardLoading = 28;
 	bool disableUniqueAbilityActivations = 29;
+	bool enablePredictions = 30;
 }
 
 message TimeoutConfig {
