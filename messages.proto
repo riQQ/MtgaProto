@@ -1529,6 +1529,7 @@ message GREToClientMessage {
 	bool informationalUseOnly = 45;
 	AllowCancel allowCancel = 50;
 	bool allowUndo = 56;
+	bool allowPrediction = 60;
 }
 
 message GREToServerMessage {
@@ -2375,6 +2376,8 @@ message PredictionReq {
 
 message PredictionResp {
 	repeated GameStateMessage gameStateMessages = 1;
+	repeated TriggeredAbility suppressedTriggeredAbilities = 2;
+	repeated GREToClientMessage greRequests = 3;
 }
 
 message Prompt {
@@ -3568,6 +3571,11 @@ enum TimerType {
 
 message TreeOfCongress {
 	repeated uint32 systemSeatId = 1;
+}
+
+message TriggeredAbility {
+	uint32 abilityGrpId = 1;
+	uint32 sourceZcid = 2;
 }
 
 message TurnInfo {
