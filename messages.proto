@@ -1071,10 +1071,10 @@ enum CounterType {
 	CounterType_Hope = 179;
 	CounterType_Influence = 180;
 	CounterType_Skewer = 181;
-	CounterType_PHCT182 = 182;
-	CounterType_PHCT183 = 183;
-	CounterType_PHCT184 = 184;
-	CounterType_PHCT185 = 185;
+	CounterType_Bore = 182;
+	CounterType_Chorus = 183;
+	CounterType_Dread = 184;
+	CounterType_Finality = 185;
 	CounterType_PHCT186 = 186;
 	CounterType_PHCT187 = 187;
 	CounterType_PHCT188 = 188;
@@ -1967,7 +1967,7 @@ enum ManaSpecType {
 	ManaSpecType_DoesNotEmpty = 7;
 	ManaSpecType_AdditionalEffect = 8;
 	ManaSpecType_FromTreasure = 9;
-	ManaSpecType_Placeholder10 = 10;
+	ManaSpecType_FromCave = 10;
 }
 
 enum MatchCompletedReasonType {
@@ -3318,15 +3318,19 @@ enum SubType {
 	SubType_Incubator = 415;
 	SubType_Siege = 416;
 	SubType_Role = 417;
-	SubType_PlaceholderSubType418 = 418;
-	SubType_PlaceholderSubType419 = 419;
-	SubType_PlaceholderSubType420 = 420;
-	SubType_PlaceholderSubType421 = 421;
-	SubType_PlaceholderSubType422 = 422;
-	SubType_PlaceholderSubType423 = 423;
+	SubType_Capybara = 418;
+	SubType_Cave = 419;
+	SubType_Llama = 420;
+	SubType_Map = 421;
+	SubType_Quintorius = 422;
+	SubType_Snail = 423;
 	SubType_PlaceholderSubType424 = 424;
 	SubType_PlaceholderSubType425 = 425;
 	SubType_PlaceholderSubType426 = 426;
+	SubType_PlaceholderSubType427 = 427;
+	SubType_PlaceholderSubType428 = 428;
+	SubType_PlaceholderSubType429 = 429;
+	SubType_PlaceholderSubType430 = 430;
 }
 
 enum SubZoneType {
