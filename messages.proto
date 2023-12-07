@@ -38,6 +38,7 @@ message Action {
 	uint32 uniqueAbilityId = 31;
 	repeated uint32 consumableCostAdjustmentQualificationIds = 32;
 	bool isManaAbilityWithSideEffect = 33;
+	bool assumeCanBePaidFor = 34;
 }
 
 message ActionInfo {
@@ -209,6 +210,7 @@ enum AnnotationType {
 	AnnotationType_RegeneratePending = 99;
 	AnnotationType_PermanentRegenerated = 100;
 	AnnotationType_ObjectsToDistinguish = 101;
+	AnnotationType_BoonInfo = 102;
 }
 
 enum Answer {
@@ -1078,7 +1080,7 @@ enum CounterType {
 	CounterType_PHCT186 = 186;
 	CounterType_PHCT187 = 187;
 	CounterType_PHCT188 = 188;
-	CounterType_PHCT189 = 189;
+	CounterType_Fetch = 189;
 }
 
 message CreateMatchGameRoomRequest {
@@ -1968,6 +1970,7 @@ enum ManaSpecType {
 	ManaSpecType_AdditionalEffect = 8;
 	ManaSpecType_FromTreasure = 9;
 	ManaSpecType_FromCave = 10;
+	ManaSpecType_CantBeCountered = 11;
 }
 
 enum MatchCompletedReasonType {
@@ -3327,7 +3330,7 @@ enum SubType {
 	SubType_PlaceholderSubType424 = 424;
 	SubType_PlaceholderSubType425 = 425;
 	SubType_PlaceholderSubType426 = 426;
-	SubType_PlaceholderSubType427 = 427;
+	SubType_Chorus = 427;
 	SubType_PlaceholderSubType428 = 428;
 	SubType_PlaceholderSubType429 = 429;
 	SubType_PlaceholderSubType430 = 430;
