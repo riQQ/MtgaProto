@@ -1091,6 +1091,10 @@ message CreateMatchGameRoomResponseV2 {
 	string mcFabricUri = 1;
 }
 
+message CubeConfig {
+	repeated uint32 cardIds = 1;
+}
+
 message DamageAssigner {
 	uint32 instanceId = 1;
 	uint32 totalDamage = 2;
@@ -1435,6 +1439,10 @@ enum GREMessageType {
 	GREMessageType_PredictionResp = 60;
 }
 
+message GREMetrics {
+	repeated KeyValuePair kvps = 1;
+}
+
 message GREResumeMatchRequest {
 	BinaryGameState binaryGameState = 1;
 }
@@ -1542,6 +1550,7 @@ message GREToServerMessage {
 		GREScheduledMessage scheduledMessage = 4;
 		GRECancelScheduledMessage cancelScheduledMessage = 5;
 		GameMetrics gameMetrics = 6;
+		GREMetrics greMetrics = 7;
 	}
 }
 
@@ -2002,6 +2011,7 @@ message MatchConfig {
 	repeated CosmeticConfig cosmeticConfigs = 14;
 	SuperFormat superFormat = 15;
 	DeckConstraintInfo deckConstraintInfo = 16;
+	CubeConfig cubeConfig = 17;
 }
 
 message MatchGameRoomConfig {
