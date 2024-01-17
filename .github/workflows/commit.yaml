@@ -1,6 +1,8 @@
 name: Check latest MTGA version on commit
 on:
   push:
+    paths-ignore:
+    - 'README.md'
   workflow_dispatch:
     inputs:
       version:
