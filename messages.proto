@@ -103,7 +103,7 @@ message AnnotationInfo {
 	repeated AnnotationType type = 4;
 	repeated KeyValuePairInfo details = 6;
 	bool redactAffector = 7;
-	repeated uint32 ignoreForSeatIds = 8;
+	repeated uint32 excludedSeatIds = 8;
 	bool redactAffected = 9;
 }
 
@@ -211,6 +211,7 @@ enum AnnotationType {
 	AnnotationType_PermanentRegenerated = 100;
 	AnnotationType_ObjectsToDistinguish = 101;
 	AnnotationType_BoonInfo = 102;
+	AnnotationType_LoseDesignation = 103;
 }
 
 enum Answer {
@@ -787,6 +788,7 @@ message ConnectReq {
 	SettingsMessage defaultSettings = 5;
 	ProtoVersion protoVer = 6;
 	Version grpVersion = 8;
+	uint32 grpChangelist = 9;
 }
 
 message ConnectResp {
@@ -797,6 +799,8 @@ message ConnectResp {
 	Version grpVersion = 10;
 	Version greVersion = 11;
 	repeated CardSkinTuple skins = 12;
+	uint32 grpChangelist = 13;
+	uint32 greChangelist = 14;
 }
 
 enum ConnectionState {
@@ -1077,10 +1081,11 @@ enum CounterType {
 	CounterType_Chorus = 183;
 	CounterType_Dread = 184;
 	CounterType_Finality = 185;
-	CounterType_PHCT186 = 186;
-	CounterType_PHCT187 = 187;
-	CounterType_PHCT188 = 188;
+	CounterType_Bloodstain = 186;
+	CounterType_Impostor = 187;
+	CounterType_Unlock = 188;
 	CounterType_Fetch = 189;
+	CounterType_PHCT190 = 190;
 }
 
 message CreateMatchGameRoomRequest {
@@ -2555,10 +2560,12 @@ message SearchFromGroupsReq {
 	GroupingStyle groupingStyle = 6;
 	uint32 sourceId = 7;
 	AllowFailToFind allowFailToFind = 8;
+	repeated uint32 additionalZones = 9;
 }
 
 message SearchFromGroupsResp {
 	repeated Group groups = 3;
+	uint32 addZoneToSearchScope = 4;
 }
 
 message SearchReq {
@@ -3337,13 +3344,17 @@ enum SubType {
 	SubType_Map = 421;
 	SubType_Quintorius = 422;
 	SubType_Snail = 423;
-	SubType_PlaceholderSubType424 = 424;
-	SubType_PlaceholderSubType425 = 425;
+	SubType_Case = 424;
+	SubType_Detective = 425;
 	SubType_PlaceholderSubType426 = 426;
 	SubType_Chorus = 427;
 	SubType_PlaceholderSubType428 = 428;
 	SubType_PlaceholderSubType429 = 429;
 	SubType_PlaceholderSubType430 = 430;
+	SubType_PlaceholderSubType431 = 431;
+	SubType_PlaceholderSubType432 = 432;
+	SubType_PlaceholderSubType433 = 433;
+	SubType_PlaceholderSubType434 = 434;
 }
 
 enum SubZoneType {
