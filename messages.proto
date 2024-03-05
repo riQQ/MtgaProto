@@ -2138,6 +2138,7 @@ enum MatchWinCondition {
 
 message ModalOption {
 	uint32 grpId = 1;
+	repeated Cost modeCost = 2;
 }
 
 message ModalReq {
@@ -2148,6 +2149,12 @@ message ModalReq {
 	bool repeatedSelectAllowed = 5;
 	repeated ModalOption excludedOptions = 6;
 	repeated uint32 otherSel = 7;
+	repeated ModeCostSolution modeCostSolutions = 8;
+}
+
+message ModeCostSolution {
+	repeated uint32 modeGrpIds = 1;
+	AutoTapSolution autoTapSolution = 2;
 }
 
 enum MulliganOption {
@@ -2320,6 +2327,7 @@ message PayCostsReq {
 	SelectNReq paymentSelection = 3;
 	EffectCostReq effectCostReq = 4;
 	AutoTapActionsAvailableReq autoTapActionsReq = 6;
+	bool shouldCancel = 7;
 }
 
 message PerformActionResp {
@@ -2655,6 +2663,7 @@ message SelectNReq {
 	repeated uint32 hotIds = 16;
 	SelectionValidationType validationType = 17;
 	repeated uint32 zoneIds = 18;
+	bool shouldCancel = 19;
 }
 
 message SelectNResp {
@@ -3355,6 +3364,7 @@ enum SubType {
 	SubType_PlaceholderSubType432 = 432;
 	SubType_PlaceholderSubType433 = 433;
 	SubType_PlaceholderSubType434 = 434;
+	SubType_Sloth = 435;
 }
 
 enum SubZoneType {
