@@ -105,6 +105,7 @@ message AnnotationInfo {
 	bool redactAffector = 7;
 	repeated uint32 excludedSeatIds = 8;
 	bool redactAffected = 9;
+	repeated uint32 temporarilyExcludedSeatIds = 10;
 }
 
 enum AnnotationType {
@@ -212,6 +213,8 @@ enum AnnotationType {
 	AnnotationType_ObjectsToDistinguish = 101;
 	AnnotationType_BoonInfo = 102;
 	AnnotationType_LoseDesignation = 103;
+	AnnotationType_SaddledThisTurn = 104;
+	AnnotationType_HiddenInformation = 105;
 }
 
 enum Answer {
@@ -1085,7 +1088,7 @@ enum CounterType {
 	CounterType_Impostor = 187;
 	CounterType_Unlock = 188;
 	CounterType_Fetch = 189;
-	CounterType_PHCT190 = 190;
+	CounterType_Loot = 190;
 }
 
 message CreateMatchGameRoomRequest {
@@ -2234,6 +2237,7 @@ enum OptionContext {
 	OptionContext_Replacement = 7;
 	OptionContext_ActivateCast = 8;
 	OptionContext_Special = 9;
+	OptionContext_Special_TurnFaceUp = 10;
 }
 
 enum OptionResponse {
@@ -2664,6 +2668,8 @@ message SelectNReq {
 	SelectionValidationType validationType = 17;
 	repeated uint32 zoneIds = 18;
 	bool shouldCancel = 19;
+	int32 minWeight = 20;
+	int32 maxWeight = 21;
 }
 
 message SelectNResp {
@@ -2674,10 +2680,16 @@ message SelectNResp {
 message SelectReplacementReq {
 	repeated ReplacementEffect replacements = 1;
 	bool isOptional = 2;
+	SelectReplacementsType replacementsType = 3;
 }
 
 message SelectReplacementResp {
 	ReplacementEffect replacement = 1;
+}
+
+enum SelectReplacementsType {
+	SelectReplacementsType_None = 0;
+	SelectReplacementsType_Placeholder1 = 1;
 }
 
 message SelectTargetsReq {
@@ -3357,13 +3369,13 @@ enum SubType {
 	SubType_Detective = 425;
 	SubType_PlaceholderSubType426 = 426;
 	SubType_Chorus = 427;
-	SubType_PlaceholderSubType428 = 428;
-	SubType_PlaceholderSubType429 = 429;
-	SubType_PlaceholderSubType430 = 430;
-	SubType_PlaceholderSubType431 = 431;
-	SubType_PlaceholderSubType432 = 432;
-	SubType_PlaceholderSubType433 = 433;
-	SubType_PlaceholderSubType434 = 434;
+	SubType_Armadillo = 428;
+	SubType_Beaver = 429;
+	SubType_Coyote = 430;
+	SubType_Mount = 431;
+	SubType_Porcupine = 432;
+	SubType_Possum = 433;
+	SubType_Varmint = 434;
 	SubType_Sloth = 435;
 }
 
@@ -3460,6 +3472,7 @@ message TestConfig {
 	bool useZeroManaCostForCasting = 5;
 	uint32 useMaxLandsPerTurn = 6;
 	TreeOfCongress treeOfCongress = 7;
+	bool disableHiFiGameStateQueueing = 9;
 	bool disableGameStateQueueingDuringCancelableActions = 10;
 	bool disableHiFiGameStates = 11;
 	bool disableTimers = 12;
