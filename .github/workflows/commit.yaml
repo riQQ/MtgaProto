@@ -9,6 +9,9 @@ on:
         description: 'Version'     
         required: false
 
+env:
+  DLL_NAME: 'Wizards.MDN.GreProtobuf.dll'
+
 jobs:
   buildjob:
     name: Get latest MTGA version
@@ -47,7 +50,7 @@ jobs:
       - name: Run MsiExtractor
         run: |
           cd "$Env:GITHUB_WORKSPACE\MsiExtractor\MsiExtractor\bin\Debug"
-          .\MsiExtractor.exe ${{ steps.download_msi.outputs.msiFilePath }} "Wizards.MDN.GreProtobuf.Unity.dll"
+          .\MsiExtractor.exe ${{ steps.download_msi.outputs.msiFilePath }} "${{env.DLL_NAME}}"
           $outputDirectory = Split-Path -Parent ${{ steps.download_msi.outputs.msiFilePath }}
           dir "$outputDirectory"
       - name: Checkout proto extractor
@@ -66,7 +69,7 @@ jobs:
       - name: Run proto extractor
         id: extract-proto
         run: |
-          dotnet run --proto3 --resolve-circular-dependancies --automatic-packaging --resolve-name-collisions --outPath "${{github.workspace}}" --libPath "${{github.workspace}}" "${{github.workspace}}\Wizards.MDN.GreProtobuf.Unity.dll"
+          dotnet run --proto3 --resolve-circular-dependancies --automatic-packaging --resolve-name-collisions --outPath "${{github.workspace}}" --libPath "${{github.workspace}}" "${{github.workspace}}\${{env.DLL_NAME}}"
           dir "${{github.workspace}}"
           $protoFile = Get-Childitem -Path "${{github.workspace}}" -Filter *.proto | Select -First 1
           echo "protoPath=$($protoFile.FullName)" >> $Env:GITHUB_OUTPUT
