@@ -98,8 +98,9 @@ jobs:
           # print progress to stdout instead of stderr to don't cause an error in powershell
           git push --porcelain
       - name: Upload proto as artifact
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v5
         with:
           name: Messages.proto
           path: ${{steps.extract-proto.outputs.protoPath}}
+
 
