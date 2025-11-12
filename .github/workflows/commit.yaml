@@ -15,7 +15,7 @@ env:
 jobs:
   buildjob:
     name: Get latest MTGA version
-    runs-on: windows-2019
+    runs-on: windows-2025
     steps:
       - uses: actions/checkout@v3
         with:
@@ -102,3 +102,4 @@ jobs:
         with:
           name: Messages.proto
           path: ${{steps.extract-proto.outputs.protoPath}}
+
