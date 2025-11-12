@@ -33,10 +33,11 @@ jobs:
           ref: refs/heads/master
           path: MsiExtractor
           fetch-depth: 1
+      - name: Add msbuild to PATH
+        uses: microsoft/setup-msbuild@v2
       - run: |
           echo $Env:GITHUB_WORKSPACE
-          cd "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\"
-          .\MSBuild.exe $Env:GITHUB_WORKSPACE\MsiExtractor\MsiExtractor.sln
+          MSBuild.exe $Env:GITHUB_WORKSPACE\MsiExtractor\MsiExtractor.sln
       - id: download_msi
         run: |
           $msiUrl = ${{ steps.get_version.outputs.msiUrl }}
@@ -102,5 +103,6 @@ jobs:
         with:
           name: Messages.proto
           path: ${{steps.extract-proto.outputs.protoPath}}
+
 
 
