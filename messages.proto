@@ -8,6 +8,8 @@ message AIConfig {
 	MatchConfig matchConfig = 1;
 	SettingsMessage defaultSettings = 2;
 	repeated DeckConfig deckConfigs = 3;
+	repeated ResponderConfig responderConfigs = 4;
+	string checkpointFilePath = 5;
 }
 
 message AchievementConfig {
@@ -468,8 +470,6 @@ message CLIPSConfiguration {
 	bool enableMetrics = 2;
 	bool enableLogging = 3;
 	string initFile = 4;
-	int32 maxFiringLimit = 5;
-	int32 warningFiringLimit = 6;
 	string metricsFile = 7;
 	string logFile = 8;
 	bool metricsFileAppend = 9;
@@ -1141,7 +1141,6 @@ message DamageAssigner {
 	repeated DamageAssignment assignments = 3;
 	Prompt decisionPrompt = 4;
 	bool canIgnoreBlockers = 5;
-	bool forcePromptAssignment = 6;
 	bool damageAffectedByReplacements = 7;
 }
 
@@ -1799,7 +1798,6 @@ message Group {
 message GroupReq {
 	repeated uint32 instanceIds = 1;
 	repeated GroupSpecification groupSpecs = 2;
-	uint32 totalSelected = 3;
 	GroupType groupType = 5;
 	GroupingContext context = 6;
 	uint32 sourceId = 7;
@@ -2592,6 +2590,15 @@ message ReportResultMessage {
 	ResultSpec result = 1;
 }
 
+message ResponderConfig {
+	uint32 seatId = 1;
+	string responderFilePath = 2;
+	bool disableMetaResponses = 3;
+	bool disableManaActions = 4;
+	bool disableColdActions = 5;
+	bool disableColdTargetSelection = 6;
+}
+
 enum ResultCode {
 	None_a500 = 0;
 	Success_a500 = 1;
@@ -2732,7 +2739,6 @@ message SelectNReq {
 	StaticList staticList = 9;
 	Prompt prompt = 11;
 	IdType idType = 12;
-	bool choicesAreRepeatable = 13;
 	repeated uint32 unfilteredIds = 14;
 	uint32 sourceId = 15;
 	repeated uint32 hotIds = 16;
@@ -3455,6 +3461,10 @@ enum SubType {
 	Terminus = 467;
 	Stone = 468;
 	PlaceholderSubType469 = 469;
+	PlaceholderSubType470 = 470;
+	PlaceholderSubType471 = 471;
+	PlaceholderSubType472 = 472;
+	PlaceholderSubType473 = 473;
 }
 
 enum SubZoneType {
@@ -3691,6 +3701,7 @@ enum TimerPackage {
 	Default = 7;
 	BestOfThree = 8;
 	BestOfOneMatchClock = 9;
+	BestOfThreeAdditionalTimeouts = 10;
 }
 
 message TimerStateMessage {
