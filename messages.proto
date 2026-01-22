@@ -1121,6 +1121,8 @@ enum CounterType {
 	Fire = 207;
 	Film = 208;
 	DoubleStrike = 209;
+	Phct210 = 210;
+	Phct211 = 211;
 }
 
 message CreateMatchGameRoomRequest {
@@ -1649,7 +1651,6 @@ message GameObjectInfo {
 	UInt32Value loyalty = 27;
 	uint32 objectSourceGrpId = 28;
 	uint32 name = 29;
-	repeated uint32 abilities = 30;
 	uint32 parentId = 31;
 	uint32 overlayGrpId = 32;
 	bool isFacedown = 33;
@@ -1660,6 +1661,7 @@ message GameObjectInfo {
 	repeated SubType removedSubtypes = 38;
 	UInt32Value defense = 39;
 	uint32 othersideGrpId = 40;
+	repeated UniqueAbilityInfo uniqueAbilities = 41;
 }
 
 enum GameObjectType {
@@ -3457,7 +3459,7 @@ enum SubType {
 	Platypus = 463;
 	Symbiote = 464;
 	Villain = 465;
-	PlaceholderSubType466 = 466;
+	Sorcerer = 466;
 	Terminus = 467;
 	Stone = 468;
 	PlaceholderSubType469 = 469;
@@ -3465,6 +3467,13 @@ enum SubType {
 	PlaceholderSubType471 = 471;
 	PlaceholderSubType472 = 472;
 	PlaceholderSubType473 = 473;
+	PlaceholderSubType474 = 474;
+	PlaceholderSubType475 = 475;
+	PlaceholderSubType476 = 476;
+	PlaceholderSubType477 = 477;
+	PlaceholderSubType478 = 478;
+	PlaceholderSubType479 = 479;
+	PlaceholderSubType480 = 480;
 }
 
 enum SubZoneType {
@@ -3766,6 +3775,11 @@ message UInt64Value {
 
 message UInt64Values {
 	repeated uint64 values = 1;
+}
+
+message UniqueAbilityInfo {
+	uint32 id = 1;
+	uint32 grpId = 2;
 }
 
 message UserConnectionInfo {
