@@ -3474,6 +3474,7 @@ enum SubType {
 	PlaceholderSubType478 = 478;
 	PlaceholderSubType479 = 479;
 	PlaceholderSubType480 = 480;
+	PlaceholderSubType481 = 481;
 }
 
 enum SubZoneType {
@@ -3711,6 +3712,8 @@ enum TimerPackage {
 	BestOfThree = 8;
 	BestOfOneMatchClock = 9;
 	BestOfThreeAdditionalTimeouts = 10;
+	BestOfOnePoweredCube = 11;
+	BestOfThreePoweredCube = 12;
 }
 
 message TimerStateMessage {
