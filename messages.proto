@@ -254,6 +254,7 @@ enum AnnotationType {
 	CopyException = 111;
 	SelectNdecoration = 112;
 	ModifiedCost = 113;
+	MultiplayerNumericAid = 114;
 }
 
 enum Answer {
@@ -553,8 +554,9 @@ enum CardMechanicType {
 	PutTopOrBottom = 52;
 	Forage = 53;
 	Enweb = 54;
-	Placeholder55 = 55;
+	Sneak = 55;
 	Placeholder56 = 56;
+	PhaseOrStepTransitionSkipNext = 57;
 }
 
 message CardSkinTuple {
@@ -1123,6 +1125,7 @@ enum CounterType {
 	DoubleStrike = 209;
 	Phct210 = 210;
 	Phct211 = 211;
+	Phct212 = 212;
 }
 
 message CreateMatchGameRoomRequest {
@@ -1322,8 +1325,8 @@ enum FailureReason {
 	InvalidOptionSelection = 13;
 	UnexpectedMessage = 14;
 	LimitViolation = 15;
-	RestrictionViolated_a63a = 16;
-	RequirementViolated_a63a = 17;
+	CombatRestrictionViolated = 16;
+	CombatRequirementViolated = 17;
 	UnpayableCost = 18;
 	InvalidSeatId = 19;
 	InvalidTeamId = 20;
@@ -1368,6 +1371,13 @@ enum FailureReason {
 	InvalidController = 59;
 	InvalidCardColor = 60;
 	InvalidDecisionPlayerForTarget = 61;
+	InvalidDamageSource_a63a = 62;
+	NonlethalDamageAssignment = 63;
+	InvalidDamageAssignment = 64;
+	TooManyTargets_a63a = 65;
+	NotEnoughTargets_a63a = 66;
+	IllegalTarget_a63a = 67;
+	TargetRestrictionViolated = 68;
 }
 
 message FinalMatchResult {
@@ -2611,14 +2621,14 @@ enum ResultCode {
 	IllegalBlock = 6;
 	OrderMismatch = 7;
 	MissingDamageSource = 8;
-	InvalidDamageSource = 9;
+	InvalidDamageSource_a500 = 9;
 	NonlethalAssignment = 10;
 	InvalidAssignment = 11;
-	TooManyTargets = 12;
-	NotEnoughTargets = 13;
-	IllegalTarget = 14;
-	RestrictionViolated_a500 = 15;
-	RequirementViolated_a500 = 16;
+	TooManyTargets_a500 = 12;
+	NotEnoughTargets_a500 = 13;
+	IllegalTarget_a500 = 14;
+	RestrictionViolated = 15;
+	RequirementViolated = 16;
 }
 
 enum ResultReason {
@@ -3462,8 +3472,8 @@ enum SubType {
 	Sorcerer = 466;
 	Terminus = 467;
 	Stone = 468;
-	PlaceholderSubType469 = 469;
-	PlaceholderSubType470 = 470;
+	Mutagen = 469;
+	Utrom = 470;
 	PlaceholderSubType471 = 471;
 	PlaceholderSubType472 = 472;
 	PlaceholderSubType473 = 473;
@@ -3475,6 +3485,13 @@ enum SubType {
 	PlaceholderSubType479 = 479;
 	PlaceholderSubType480 = 480;
 	PlaceholderSubType481 = 481;
+	PlaceholderSubType482 = 482;
+	PlaceholderSubType483 = 483;
+	PlaceholderSubType484 = 484;
+	PlaceholderSubType485 = 485;
+	PlaceholderSubType486 = 486;
+	PlaceholderSubType487 = 487;
+	PlaceholderSubType488 = 488;
 }
 
 enum SubZoneType {
