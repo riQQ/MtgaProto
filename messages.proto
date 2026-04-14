@@ -255,6 +255,7 @@ enum AnnotationType {
 	SelectNdecoration = 112;
 	ModifiedCost = 113;
 	MultiplayerNumericAid = 114;
+	HighlightReason = 115;
 }
 
 enum Answer {
@@ -855,16 +856,6 @@ enum ControllerType {
 	AiMultiplayerConcession = 5;
 }
 
-message CosmeticConfig {
-	uint32 seatId = 1;
-	string data = 2;
-}
-
-message CosmeticInfo {
-	uint32 seatId = 1;
-	string data = 2;
-}
-
 message Cost {
 	CostType type = 1;
 	uint32 id = 2;
@@ -1065,7 +1056,7 @@ enum CounterType {
 	Night = 149;
 	Indestructible = 150;
 	Hone = 151;
-	Book = 152;
+	Book_a40e = 152;
 	Point = 153;
 	Enlightened = 154;
 	Harmony = 155;
@@ -1126,6 +1117,9 @@ enum CounterType {
 	Phct210 = 210;
 	Phct211 = 211;
 	Phct212 = 212;
+	Phct213 = 213;
+	Phct214 = 214;
+	Phct215 = 215;
 }
 
 message CreateMatchGameRoomRequest {
@@ -2097,7 +2091,6 @@ message MatchConfig {
 	repeated TimerConfig timerConfigs = 11;
 	TimerPackage timerPackage = 12;
 	TimeoutConfig timeoutConfig = 13;
-	repeated CosmeticConfig cosmeticConfigs = 14;
 	SuperFormat superFormat = 15;
 	DeckConstraintInfo deckConstraintInfo = 16;
 	CubeConfig cubeConfig = 17;
@@ -2609,6 +2602,7 @@ message ResponderConfig {
 	bool disableManaActions = 4;
 	bool disableColdActions = 5;
 	bool disableColdTargetSelection = 6;
+	bool enableSmartPlayActions = 7;
 }
 
 enum ResultCode {
@@ -2896,7 +2890,6 @@ message SettingsMessage {
 	Setting autoOptionalPaymentCancellationSetting = 13;
 	ManaPaymentStrategyType manaPaymentStrategyType = 14;
 	repeated Stop transientStops = 15;
-	repeated CosmeticInfo cosmetics = 16;
 	Setting autoSelectReplacementSetting = 17;
 	AutoPassOption stackAutoPassOption = 19;
 }
@@ -3474,9 +3467,9 @@ enum SubType {
 	Stone = 468;
 	Mutagen = 469;
 	Utrom = 470;
-	PlaceholderSubType471 = 471;
-	PlaceholderSubType472 = 472;
-	PlaceholderSubType473 = 473;
+	Book_a8d0 = 471;
+	Dellian = 472;
+	Giraffe = 473;
 	PlaceholderSubType474 = 474;
 	PlaceholderSubType475 = 475;
 	PlaceholderSubType476 = 476;
@@ -3492,6 +3485,46 @@ enum SubType {
 	PlaceholderSubType486 = 486;
 	PlaceholderSubType487 = 487;
 	PlaceholderSubType488 = 488;
+	PlaceholderSubType489 = 489;
+	PlaceholderSubType490 = 490;
+	PlaceholderSubType491 = 491;
+	PlaceholderSubType492 = 492;
+	PlaceholderSubType493 = 493;
+	PlaceholderSubType494 = 494;
+	PlaceholderSubType495 = 495;
+	PlaceholderSubType496 = 496;
+	PlaceholderSubType497 = 497;
+	PlaceholderSubType498 = 498;
+	PlaceholderSubType499 = 499;
+	PlaceholderSubType500 = 500;
+	PlaceholderSubType501 = 501;
+	PlaceholderSubType502 = 502;
+	PlaceholderSubType503 = 503;
+	PlaceholderSubType504 = 504;
+	PlaceholderSubType505 = 505;
+	PlaceholderSubType506 = 506;
+	PlaceholderSubType507 = 507;
+	PlaceholderSubType508 = 508;
+	PlaceholderSubType509 = 509;
+	PlaceholderSubType510 = 510;
+	PlaceholderSubType511 = 511;
+	PlaceholderSubType512 = 512;
+	PlaceholderSubType513 = 513;
+	PlaceholderSubType514 = 514;
+	PlaceholderSubType515 = 515;
+	PlaceholderSubType516 = 516;
+	PlaceholderSubType517 = 517;
+	PlaceholderSubType518 = 518;
+	PlaceholderSubType519 = 519;
+	PlaceholderSubType520 = 520;
+	PlaceholderSubType521 = 521;
+	PlaceholderSubType522 = 522;
+	PlaceholderSubType523 = 523;
+	PlaceholderSubType524 = 524;
+	PlaceholderSubType525 = 525;
+	PlaceholderSubType526 = 526;
+	PlaceholderSubType527 = 527;
+	PlaceholderSubType528 = 528;
 }
 
 enum SubZoneType {
