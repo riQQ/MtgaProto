@@ -1394,6 +1394,9 @@ message ForceDrawReq {
 	MatchScope scope = 1;
 }
 
+message GREAssignPriorityMessage {
+}
+
 message GRECancelScheduledMessage {
 	uint32 timerId = 1;
 }
@@ -1415,12 +1418,20 @@ message GRECreateRequest {
 	string matchID = 2;
 }
 
+message GREDequeuedMessage {
+	ClientToGREMessage message = 1;
+}
+
 message GREDestroyRequest {
 }
 
 message GREElapseTimeRequest {
 	uint32 timerId = 1;
 	uint32 timeMs = 2;
+}
+
+message GREEnqueuedMessage {
+	ServerToGREMessage message = 1;
 }
 
 message GREExpireTimerRequest {
@@ -1602,6 +1613,7 @@ message GREToServerMessage {
 		GameMetrics gameMetrics = 6;
 		GREMetrics greMetrics = 7;
 		AchievementStateMessage achievementStateMessage = 8;
+		GREEnqueuedMessage enqueuedMessage = 9;
 	}
 }
 
@@ -2831,6 +2843,8 @@ message ServerToGREMessage {
 		GREElapseTimeRequest elapseTimeRequest = 13;
 		GREStartDelayedTimerMessage startDelayedTimerMessage = 14;
 		GRERestoreRequest restoreRequest = 15;
+		GREDequeuedMessage dequeued = 16;
+		GREAssignPriorityMessage assignPriority = 17;
 	}
 }
 
@@ -3654,6 +3668,8 @@ message TestConfig {
 	bool enablePredictions = 30;
 	bool enableDamageOrdering = 31;
 	bool disableHiFiAchievements = 32;
+	bool disableAmortizedAutoPassing = 33;
+	bool isReplaying = 34;
 }
 
 message TimeoutConfig {
