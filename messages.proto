@@ -256,6 +256,7 @@ enum AnnotationType {
 	ModifiedCost = 113;
 	MultiplayerNumericAid = 114;
 	HighlightReason = 115;
+	PersistentChoiceResult = 116;
 }
 
 enum Answer {
@@ -280,10 +281,6 @@ message AnyToGREMessage {
 		ServerToGREMessage serverToGREMessage = 2;
 		ClientToGREMessage clientToGREMessage = 3;
 	}
-}
-
-message AssignDamageConfirmation {
-	ResultCode result = 1;
 }
 
 message AssignDamageReq {
@@ -554,7 +551,7 @@ enum CardMechanicType {
 	Exert = 51;
 	PutTopOrBottom = 52;
 	Forage = 53;
-	Enweb = 54;
+	Webslinging = 54;
 	Sneak = 55;
 	Placeholder56 = 56;
 	PhaseOrStepTransitionSkipNext = 57;
@@ -840,6 +837,7 @@ enum ConnectionStatus {
 	Success_aa9e = 1;
 	GrpversionIncompat = 2;
 	ProtoVersionIncompat = 3;
+	InvalidSeatId_aa9e = 4;
 }
 
 message ControlReq {
@@ -1114,12 +1112,13 @@ enum CounterType {
 	Fire = 207;
 	Film = 208;
 	DoubleStrike = 209;
-	Phct210 = 210;
-	Phct211 = 211;
-	Phct212 = 212;
+	Invasion = 210;
+	Plan_a40e = 211;
+	Saurian = 212;
 	Phct213 = 213;
 	Phct214 = 214;
-	Phct215 = 215;
+	Haste = 215;
+	Phct216 = 216;
 }
 
 message CreateMatchGameRoomRequest {
@@ -1322,7 +1321,7 @@ enum FailureReason {
 	CombatRestrictionViolated = 16;
 	CombatRequirementViolated = 17;
 	UnpayableCost = 18;
-	InvalidSeatId = 19;
+	InvalidSeatId_a63a = 19;
 	InvalidTeamId = 20;
 	InvalidMatchState = 21;
 	InvalidMatchScope = 22;
@@ -1365,13 +1364,30 @@ enum FailureReason {
 	InvalidController = 59;
 	InvalidCardColor = 60;
 	InvalidDecisionPlayerForTarget = 61;
-	InvalidDamageSource_a63a = 62;
+	InvalidDamageSource = 62;
 	NonlethalDamageAssignment = 63;
 	InvalidDamageAssignment = 64;
-	TooManyTargets_a63a = 65;
-	NotEnoughTargets_a63a = 66;
-	IllegalTarget_a63a = 67;
+	TooManyTargets = 65;
+	NotEnoughTargets = 66;
+	IllegalTarget = 67;
 	TargetRestrictionViolated = 68;
+	DuplicateBlocker = 69;
+	InvalidCastingTimeOption = 70;
+	InvalidCastingTimeOptionType = 71;
+	InvalidCastingTimeOptionCount = 72;
+	InvalidModeCount = 73;
+	InvalidMode = 74;
+	DuplicateMode = 75;
+	InvalidActionCount = 76;
+	InvalidBlockerCount = 77;
+	InvalidBlocker = 78;
+	InvalidAutoTapSolution = 79;
+	InvalidAutoPassPriority = 80;
+	InvalidReplacement = 81;
+	InvalidTarget = 82;
+	InvalidTargetCount = 83;
+	InvalidGathering = 84;
+	UnexpectedMessageId = 85;
 }
 
 message FinalMatchResult {
@@ -1568,13 +1584,9 @@ message GREToClientMessage {
 		IllegalRequestMessage illegalRequestMessage = 19;
 		BinaryGameState binaryGameState = 23;
 		DeclareAttackersReq declareAttackersReq = 24;
-		SubmitAttackersResp submitAttackersResp = 25;
 		DeclareBlockersReq declareBlockersReq = 26;
-		SubmitBlockersResp submitBlockersResp = 27;
 		AssignDamageReq assignDamageReq = 28;
-		AssignDamageConfirmation assignDamageConfirmation = 29;
 		SelectTargetsReq selectTargetsReq = 32;
-		SubmitTargetsResp submitTargetsResp = 33;
 		PayCostsReq payCostsReq = 34;
 		IntermissionReq intermissionReq = 36;
 		DieRollResultsResp dieRollResultsResp = 37;
@@ -2098,6 +2110,7 @@ message MatchConfig {
 	MatchWinCondition winCondition = 3;
 	uint32 maxPlayerHandSize = 5;
 	repeated TeamConfig teams = 6;
+	repeated SpectatorConfig spectators = 7;
 	TestConfig testConfig = 9;
 	MulliganType mulliganType = 10;
 	repeated TimerConfig timerConfigs = 11;
@@ -2617,26 +2630,6 @@ message ResponderConfig {
 	bool enableSmartPlayActions = 7;
 }
 
-enum ResultCode {
-	None_a500 = 0;
-	Success_a500 = 1;
-	Failure = 2;
-	CannotAttack = 3;
-	AttackCostUnpaid = 4;
-	CannotBlock = 5;
-	IllegalBlock = 6;
-	OrderMismatch = 7;
-	MissingDamageSource = 8;
-	InvalidDamageSource_a500 = 9;
-	NonlethalAssignment = 10;
-	InvalidAssignment = 11;
-	TooManyTargets_a500 = 12;
-	NotEnoughTargets_a500 = 13;
-	IllegalTarget_a500 = 14;
-	RestrictionViolated = 15;
-	RequirementViolated = 16;
-}
-
 enum ResultReason {
 	None_ae0a = 0;
 	Game_ae0a = 1;
@@ -2941,6 +2934,10 @@ enum SmartStopsSetting {
 	None_a188 = 0;
 	Enable_a188 = 1;
 	Disable_a188 = 2;
+}
+
+message SpectatorConfig {
+	uint32 seatId = 1;
 }
 
 enum StaticList {
@@ -3477,28 +3474,22 @@ enum SubType {
 	Symbiote = 464;
 	Villain = 465;
 	Sorcerer = 466;
-	Terminus = 467;
 	Stone = 468;
 	Mutagen = 469;
 	Utrom = 470;
 	Book_a8d0 = 471;
 	Dellian = 472;
 	Giraffe = 473;
-	PlaceholderSubType474 = 474;
-	PlaceholderSubType475 = 475;
-	PlaceholderSubType476 = 476;
-	PlaceholderSubType477 = 477;
-	PlaceholderSubType478 = 478;
-	PlaceholderSubType479 = 479;
-	PlaceholderSubType480 = 480;
-	PlaceholderSubType481 = 481;
-	PlaceholderSubType482 = 482;
-	PlaceholderSubType483 = 483;
-	PlaceholderSubType484 = 484;
-	PlaceholderSubType485 = 485;
-	PlaceholderSubType486 = 486;
-	PlaceholderSubType487 = 487;
-	PlaceholderSubType488 = 488;
+	Plan_a8d0 = 478;
+	Spy = 479;
+	Infinity = 481;
+	Eternal = 482;
+	Gamma = 483;
+	Inhuman = 484;
+	Kree = 485;
+	Skrull = 486;
+	Vibranium = 487;
+	Shiar = 488;
 	PlaceholderSubType489 = 489;
 	PlaceholderSubType490 = 490;
 	PlaceholderSubType491 = 491;
@@ -3539,6 +3530,13 @@ enum SubType {
 	PlaceholderSubType526 = 526;
 	PlaceholderSubType527 = 527;
 	PlaceholderSubType528 = 528;
+	PlaceholderSubType529 = 529;
+	PlaceholderSubType530 = 530;
+	PlaceholderSubType531 = 531;
+	PlaceholderSubType532 = 532;
+	PlaceholderSubType533 = 533;
+	PlaceholderSubType534 = 534;
+	PlaceholderSubType535 = 535;
 }
 
 enum SubZoneType {
@@ -3547,24 +3545,12 @@ enum SubZoneType {
 	Bottom = 2;
 }
 
-message SubmitAttackersResp {
-	ResultCode result = 1;
-}
-
-message SubmitBlockersResp {
-	ResultCode result = 1;
-}
-
 message SubmitDeckReq {
 	DeckMessage deck = 1;
 }
 
 message SubmitDeckResp {
 	DeckMessage deck = 1;
-}
-
-message SubmitTargetsResp {
-	ResultCode result = 1;
 }
 
 enum SuperFormat {
