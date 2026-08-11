@@ -103,6 +103,7 @@ enum ActionType {
 	CastLeftRoom = 22;
 	CastRightRoom = 23;
 	CastOmen = 24;
+	Placeholder25 = 25;
 }
 
 message ActionsAvailableReq {
@@ -257,6 +258,7 @@ enum AnnotationType {
 	MultiplayerNumericAid = 114;
 	HighlightReason = 115;
 	PersistentChoiceResult = 116;
+	EnteredZoneAtSameTime = 117;
 }
 
 enum Answer {
@@ -1118,7 +1120,11 @@ enum CounterType {
 	Phct213 = 213;
 	Phct214 = 214;
 	Haste = 215;
-	Phct216 = 216;
+	Shadow = 216;
+	Refine = 217;
+	Phct218 = 218;
+	Phct219 = 219;
+	Phct220 = 220;
 }
 
 message CreateMatchGameRoomRequest {
@@ -3538,6 +3544,10 @@ enum SubType {
 	PlaceholderSubType533 = 533;
 	PlaceholderSubType534 = 534;
 	PlaceholderSubType535 = 535;
+	PlaceholderSubType537 = 537;
+	PlaceholderSubType538 = 538;
+	PlaceholderSubType539 = 539;
+	PlaceholderSubType540 = 540;
 }
 
 enum SubZoneType {
