@@ -580,6 +580,7 @@ enum CardType {
 	Vanguard_a80b = 12;
 	Dungeon = 13;
 	Battle = 14;
+	Conspiracy = 15;
 }
 
 message CastingTimeOptionReq {
@@ -1850,6 +1851,7 @@ message GroupSpecification {
 	ZoneType zoneType = 3;
 	SubZoneType subZoneType = 4;
 	bool isFacedown = 6;
+	repeated uint32 hotIds = 7;
 }
 
 enum GroupType {
@@ -2455,6 +2457,7 @@ message PlayerConfig {
 	repeated CardSkinTuple skins = 11;
 	ShuffleRestriction shuffleRestriction = 12;
 	uint32 playerConfigFieldThirteen = 13;
+	repeated ToastTuple toasts = 14;
 }
 
 message PlayerDieRoll {
@@ -3497,8 +3500,8 @@ enum SubType {
 	Skrull = 486;
 	Vibranium = 487;
 	Shiar = 488;
-	PlaceholderSubType489 = 489;
-	PlaceholderSubType490 = 490;
+	Heartwood = 489;
+	Sculpture = 490;
 	PlaceholderSubType491 = 491;
 	PlaceholderSubType492 = 492;
 	PlaceholderSubType493 = 493;
@@ -3544,6 +3547,7 @@ enum SubType {
 	PlaceholderSubType533 = 533;
 	PlaceholderSubType534 = 534;
 	PlaceholderSubType535 = 535;
+	PlaceholderSubType536 = 536;
 	PlaceholderSubType537 = 537;
 	PlaceholderSubType538 = 538;
 	PlaceholderSubType539 = 539;
@@ -3794,6 +3798,11 @@ enum TimerType {
 	Epilogue = 6;
 	Delay_a5e2 = 7;
 	MatchClock = 8;
+}
+
+message ToastTuple {
+	uint32 toastID = 1;
+	uint32 toastParam = 2;
 }
 
 message TreeOfCongress {
