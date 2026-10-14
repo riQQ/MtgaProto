@@ -1126,6 +1126,7 @@ enum CounterType {
 	Phct218 = 218;
 	Phct219 = 219;
 	Phct220 = 220;
+	Phct221 = 221;
 }
 
 message CreateMatchGameRoomRequest {
@@ -1395,6 +1396,7 @@ enum FailureReason {
 	InvalidTargetCount = 83;
 	InvalidGathering = 84;
 	UnexpectedMessageId = 85;
+	InvalidConcession = 86;
 }
 
 message FinalMatchResult {
@@ -3552,6 +3554,7 @@ enum SubType {
 	PlaceholderSubType538 = 538;
 	PlaceholderSubType539 = 539;
 	PlaceholderSubType540 = 540;
+	PlaceholderSubType541 = 541;
 }
 
 enum SubZoneType {
